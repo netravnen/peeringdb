@@ -3,134 +3,143 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-31 22:32+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2018-06-01 14:07+0200\n"
+"Language: da_DK\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: peeringdb_server/static/peeringdb.js:415
 #: peeringdb_server/static/peeringdb.js:745
 msgid "Remove"
-msgstr ""
+msgstr "Fjern"
 
 #: peeringdb_server/static/peeringdb.js:425
 msgid "Canceled"
-msgstr ""
+msgstr "Annuller"
 
 #: peeringdb_server/static/peeringdb.js:449
 msgid "Add user"
-msgstr ""
+msgstr "Tilføj bruger"
 
 #: peeringdb_server/static/peeringdb.js:449
 msgid "to Organization?"
-msgstr ""
+msgstr "til organisation?"
 
 #: peeringdb_server/static/peeringdb.js:466
+#, fuzzy
 msgid "Deny"
-msgstr ""
+msgstr "Bloker"
 
 #: peeringdb_server/static/peeringdb.js:466
+#, fuzzy
 msgid "request to join the Organization?"
-msgstr ""
+msgstr "forespørg at blive tilføjet til organisation?"
 
 #: peeringdb_server/static/peeringdb.js:615
 msgid "Unknown request type:"
-msgstr ""
+msgstr "Ukendt forespørgsels type:"
 
 #: peeringdb_server/static/peeringdb.js:631
 #: peeringdb_server/static/twentyc.edit.js:622
 msgid "The server rejected your data"
-msgstr ""
+msgstr "Serveren afviste dine data"
 
 #: peeringdb_server/static/peeringdb.js:635
 msgid "not yet been approved"
-msgstr ""
+msgstr "endnu ikke godkendt"
 
 #: peeringdb_server/static/peeringdb.js:636
 msgid "Parent entity pending review - please wait for it to be approved before adding entities to it"
-msgstr ""
+msgstr "Forældre entitet afventer gennemgang - vent venligst til denne er godkendt føre du tilføjer entiteter"
 
 #: peeringdb_server/static/peeringdb.js:773
 msgid "Exchange"
-msgstr ""
+msgstr "Exchange"
 
 #: peeringdb_server/static/peeringdb.js:789
 msgid "Participant"
-msgstr ""
+msgstr "Deltager"
 
 #: peeringdb_server/static/peeringdb.js:805
+#, fuzzy
 msgid "Facility"
-msgstr ""
+msgstr "Facility"
 
 #: peeringdb_server/static/peeringdb.js:816
+#, fuzzy
 msgid "Network Contact"
-msgstr ""
+msgstr "Netværks kontakt"
 
 #: peeringdb_server/static/peeringdb.js:849
+#, fuzzy
 msgid "Network - Exchange link"
-msgstr ""
+msgstr "Netværk - Exchange link"
 
 #: peeringdb_server/static/peeringdb.js:894
+#, fuzzy
 msgid "Network - Facility link"
-msgstr ""
+msgstr "Netværk - Facility link"
 
 #: peeringdb_server/static/peeringdb.js:920
 msgid "IXLAN"
-msgstr ""
+msgstr "IXLAN"
 
 #: peeringdb_server/static/peeringdb.js:938
 msgid "IXLAN Prefix"
-msgstr ""
+msgstr "IXLAN præfiks"
 
 #: peeringdb_server/static/peeringdb.js:959
+#, fuzzy
 msgid "Exchange - Facility link"
-msgstr ""
+msgstr "Exchange - Facility link"
 
 #: peeringdb_server/static/twentyc.edit.js:83
 msgid "Some of the fields contain invalid values - please correct and try again."
-msgstr ""
+msgstr "Nogle af felterne indeholder ugyldige værdier - korriger venligst og prøv igen."
 
 #: peeringdb_server/static/twentyc.edit.js:86
 msgid "Something went wrong."
-msgstr ""
+msgstr "Noget gik galt."
 
 #: peeringdb_server/static/twentyc.edit.js:783
 msgid "Invalid value"
-msgstr ""
+msgstr "Ugyldig værdi"
 
 #: peeringdb_server/static/twentyc.edit.js:787
+#, fuzzy
 msgid "Input required"
-msgstr ""
+msgstr "Data påkrævet"
 
 #: peeringdb_server/static/twentyc.edit.js:870
+#, fuzzy
 msgid "Needs to match password"
-msgstr ""
+msgstr "Kodeord skal matche"
 
 #: peeringdb_server/static/twentyc.edit.js:887
 msgid "Needs to be a valid email address"
-msgstr ""
+msgstr "E-mail adresse skal være gyldig"
 
 #: peeringdb_server/static/twentyc.edit.js:916
 msgid "Needs to be a valid url"
-msgstr ""
+msgstr "URL skal være gyldig"
 
 #: peeringdb_server/static/twentyc.edit.js:936
 msgid "Needs to be a number"
-msgstr ""
+msgstr "Nummer skal være gyldig"
 
 #: peeringdb_server/static/twentyc.edit.js:946
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: peeringdb_server/static/twentyc.edit.js:946
 msgid "No"
-msgstr ""
+msgstr "Nej"
