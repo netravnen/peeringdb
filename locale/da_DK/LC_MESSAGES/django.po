@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-31 22:32+0000\n"
-"PO-Revision-Date: 2018-06-01 15:30+0200\n"
+"PO-Revision-Date: 2018-06-04 23:40+0200\n"
 "Language: da_DK\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,7 @@ msgstr "Flere"
 
 #: django_peeringdb/const.py:8
 msgid "Abuse"
-msgstr ""
+msgstr "Misbrug"
 
 #: django_peeringdb/const.py:9
 msgid "Maintenance"
@@ -64,8 +64,9 @@ msgid "Open"
 msgstr "Åben"
 
 #: django_peeringdb/const.py:19
+#, fuzzy
 msgid "Selective"
-msgstr ""
+msgstr "Efter (nærmere) vurdering"
 
 #: django_peeringdb/const.py:20
 msgid "Restrictive"
@@ -157,7 +158,7 @@ msgstr "Nord Amerika"
 
 #: django_peeringdb/const.py:48 django_peeringdb/const.py:60
 msgid "Asia Pacific"
-msgstr ""
+msgstr "Sydøst Asien"
 
 #: django_peeringdb/const.py:49 django_peeringdb/const.py:61
 msgid "Europe"
@@ -260,12 +261,13 @@ msgid "Cable/DSL/ISP"
 msgstr "Kabel/DSL/ISP"
 
 #: django_peeringdb/const.py:92
+#, fuzzy
 msgid "Enterprise"
-msgstr ""
+msgstr "Virksomhed"
 
 #: django_peeringdb/const.py:93
 msgid "Educational/Research"
-msgstr ""
+msgstr "Uddannelse/Forskning"
 
 #: django_peeringdb/const.py:94
 msgid "Non-Profit"
@@ -299,24 +301,23 @@ msgstr "Status"
 
 #: peeringdb_server/admin.py:133
 msgid "Target org cannot be in selected organizations list"
-msgstr ""
+msgstr "Den valgte organisation kan ikke vælges i organisations listen"
 
 #: peeringdb_server/admin.py:258
 msgid "ROLLBACK"
 msgstr "Rul tilbage"
 
 #: peeringdb_server/admin.py:269
-#, fuzzy
 msgid "SOFT DELETE"
 msgstr "Flyt til affaldskurv"
 
 #: peeringdb_server/admin.py:340
 msgid "Verification Queue is currently disabled"
-msgstr ""
+msgstr "Verifikations køen er på nuværende tidspunkt deaktiveret"
 
 #: peeringdb_server/admin.py:343
 msgid "Verification Queue is currently disabled for this object type"
-msgstr ""
+msgstr "Verifikations køen er på nuværende tidspunkt deaktiveret for denne objekt type"
 
 #: peeringdb_server/admin.py:353
 msgid "APPROVE"
@@ -331,7 +332,6 @@ msgid "APPROVED"
 msgstr "GODKENDT"
 
 #: peeringdb_server/admin.py:420 peeringdb_server/admin.py:429
-#, fuzzy
 msgid "Ipaddress already exists elsewhere"
 msgstr "IP adresse eksistere allerede et andet sted"
 
@@ -340,13 +340,12 @@ msgid "User is looking to be affiliated to these Organizations"
 msgstr "Brugeren vil gerne tilknyttes disse organisationer"
 
 #: peeringdb_server/admin.py:479
-#, fuzzy
 msgid "IXF Import History"
 msgstr "IXF Import historik"
 
 #: peeringdb_server/admin.py:528
 msgid "Initial creation of netixlan"
-msgstr ""
+msgstr "Første oprettelse af netixlan"
 
 #: peeringdb_server/admin.py:548
 msgid "CAN BE ROLLED BACK"
@@ -377,7 +376,6 @@ msgid "Organization"
 msgstr "Organisation"
 
 #: peeringdb_server/admin.py:622
-#, fuzzy
 msgid "Not Set"
 msgstr "Ikke konfigureret"
 
@@ -391,7 +389,7 @@ msgstr "Aktiv"
 
 #: peeringdb_server/admin.py:629
 msgid "Over"
-msgstr ""
+msgstr "Over"
 
 #: peeringdb_server/admin.py:631
 msgid "Waiting"
@@ -399,11 +397,11 @@ msgstr "Venter"
 
 #: peeringdb_server/admin.py:688
 msgid "Malformed organization ids"
-msgstr ""
+msgstr "Ikke korrekt formateret organisations id'er"
 
 #: peeringdb_server/admin.py:695
 msgid "Merge target organization does not exist"
-msgstr ""
+msgstr "Organisation der skal sammenlægges til, findes ikke"
 
 #: peeringdb_server/admin.py:709
 msgid "Organization Merging Tool"
@@ -427,7 +425,7 @@ msgstr "Vis"
 
 #: peeringdb_server/admin.py:843
 msgid "Affiliation request was approved and the user was notified."
-msgstr ""
+msgstr "Tilknytningsforespørgslen blev godkendt og brugeren underrettet"
 
 #: peeringdb_server/admin.py:845
 msgid "Approve and notify User"
@@ -470,11 +468,11 @@ msgstr "Bruger rettigheder"
 
 #: peeringdb_server/admin.py:1013
 msgid "Duplicate IP"
-msgstr ""
+msgstr "Duplikeret IP"
 
 #: peeringdb_server/admin.py:1014
 msgid "Duplicate IPs"
-msgstr ""
+msgstr "Duplikeret IP'er"
 
 #: peeringdb_server/admin.py:1141
 msgid "Updated"
@@ -482,7 +480,7 @@ msgstr "Opdateret"
 
 #: peeringdb_server/admin.py:1259 peeringdb_server/admin.py:1291
 msgid "Only POST requests allowed."
-msgstr ""
+msgstr "Kun POST forespørgsler er tilladt"
 
 #: peeringdb_server/admin.py:1269
 msgid "{} (Preview)"
@@ -490,11 +488,11 @@ msgstr "{} (Forhåndsvisning)"
 
 #: peeringdb_server/admin_commandline_tools.py:136
 msgid "Three leftmost octets of the original prefix - eg. xxx.xxx.xxx"
-msgstr ""
+msgstr "Netværks okteterne af det originale præfiks - f.eks. xxx.xxx.xxx"
 
 #: peeringdb_server/admin_commandline_tools.py:140
 msgid "Three leftmost octets of the new prefix - eg. xxx.xxx.xxx"
-msgstr ""
+msgstr "Netværks okteterne af det nye præfiks - f.eks. xxx.xxx.xxx"
 
 #: peeringdb_server/data_views.py:47 peeringdb_server/data_views.py:48
 #: peeringdb_server/templates/site/view_organization_tools.html:516
@@ -502,13 +500,12 @@ msgid "Yes"
 msgstr "Ja"
 
 #: peeringdb_server/export_views.py:140
-#, fuzzy
 msgid "Invalid export format"
 msgstr "Ugyldigt eksporteringsformat"
 
 #: peeringdb_server/export_views.py:284
 msgid "Invalid tag"
-msgstr ""
+msgstr "Ugyldigt tag"
 
 #: peeringdb_server/forms.py:21
 msgid "Invalid permission level"
@@ -555,27 +552,27 @@ msgid "RIR"
 msgstr "RIR"
 
 #: peeringdb_server/models.py:47
+#, fuzzy
 msgid "Renumber IP Space"
-msgstr ""
+msgstr "Gen-nummerering af IP objekt"
 
 #: peeringdb_server/models.py:147
 msgid "Has this object's latitude and longitude been syncronized to it's address fields"
-msgstr ""
+msgstr "Har dette objekts bredde- og længdegrad blevet synkroniseret til dets adresse felter"
 
 #: peeringdb_server/models.py:150
 msgid "Last time of attempted geocode"
-msgstr ""
+msgstr "Sidste gang et forsøg på opdatering af koordinater til adresse blev udført"
 
 #: peeringdb_server/models.py:153
 msgid "Error message of previous geocode attempt"
-msgstr ""
+msgstr "Fejlbesked fra sidste forsøg på at omsætte koordinater til adresse-info."
 
 #: peeringdb_server/models.py:200
 msgid "Address not found"
 msgstr "Adresse ikke fundet"
 
 #: peeringdb_server/models.py:208
-#, fuzzy
 msgid "API Timeout"
 msgstr "API Timeout"
 
@@ -613,11 +610,11 @@ msgstr "Status for denne forespørgsel"
 
 #: peeringdb_server/models.py:258
 msgid "User to Organization Affiliation Request"
-msgstr ""
+msgstr "Bruger til organisations tilknytningsforespørgsel"
 
 #: peeringdb_server/models.py:259
 msgid "User to Organization Affiliation Requests"
-msgstr ""
+msgstr "Bruger til organisations tilknytningsforespørgsler"
 
 #: peeringdb_server/models.py:316
 msgid "Your affiliation to Organization \"{}\" has been approved"
@@ -641,14 +638,13 @@ msgstr "Sponsoraftale slutter den"
 
 #: peeringdb_server/models.py:662
 msgid "Expiration notification sent on"
-msgstr ""
+msgstr "Udløbsnotifikation sendt den"
 
 #: peeringdb_server/models.py:665 peeringdb_server/models.py:723
 msgid "URL"
 msgstr "URL"
 
 #: peeringdb_server/models.py:666
-#, fuzzy
 msgid "If specified clicking the sponsorship will take the user to this location"
 msgstr "Hvis konfigureret vil klik på sponsorlogo føre brugeren til denne URL"
 
@@ -669,7 +665,6 @@ msgid "Sponsorship Expired"
 msgstr "Sponsoraftale udløbet"
 
 #: peeringdb_server/models.py:724
-#, fuzzy
 msgid "If specified clicking the partnership will take the user to this location"
 msgstr "Hvis konfigureret vil klik på partnerlogo føre brugeren til denne URL"
 
@@ -699,11 +694,11 @@ msgstr "Organisationer sammenlægninger"
 
 #: peeringdb_server/models.py:808
 msgid "Organization Merge: Entity"
-msgstr ""
+msgstr "Organisationssammenlægning: Entitet"
 
 #: peeringdb_server/models.py:809
 msgid "Organization Merge: Entities"
-msgstr ""
+msgstr "Organisationssammenlægning: Entiteter"
 
 #: peeringdb_server/models.py:911 peeringdb_server/models.py:1110
 msgid "Need to specify at least two asns"
@@ -718,7 +713,6 @@ msgid "No JSON could be parsed"
 msgstr "Intet JSON kunne fortolkes"
 
 #: peeringdb_server/models.py:1344
-#, fuzzy
 msgid "No entries in any of the vlan_list lists, aborting."
 msgstr "Ingen poster i nogen af vlan_list listerne, annullere."
 
@@ -771,8 +765,9 @@ msgid "last name"
 msgstr "efternavn"
 
 #: peeringdb_server/models.py:2307
+#, fuzzy
 msgid "staff status"
-msgstr ""
+msgstr "Operatør status"
 
 #: peeringdb_server/models.py:2308
 msgid "Designates whether the user can log into admin site."
@@ -787,7 +782,6 @@ msgid "Designates whether this user should be treated as active. Unselect this i
 msgstr "Angiver om brugeren skal behandles som aktiv. Fjern denne markering i stedet for at slette kontoen."
 
 #: peeringdb_server/models.py:2313
-#, fuzzy
 msgid "date joined"
 msgstr "første gang aktiv"
 
@@ -821,7 +815,7 @@ msgstr ""
 
 #: peeringdb_server/models.py:2592
 msgid "result log"
-msgstr ""
+msgstr "resultats log"
 
 #: peeringdb_server/models.py:2594
 msgid "the user that ran this command"
@@ -832,21 +826,20 @@ msgid "command was run at this date and time"
 msgstr "kommandoen blev kørt på denne dato og dette tidspunkt"
 
 #: peeringdb_server/org_admin_views.py:140
-#, fuzzy
 msgid "Organization and all Entities it owns"
 msgstr "Organisation og alle entiteter den ejer"
 
 #: peeringdb_server/org_admin_views.py:141
 msgid "Any Network"
-msgstr ""
+msgstr "Hvilken som helst netværk"
 
 #: peeringdb_server/org_admin_views.py:142
 msgid "Any Facility"
-msgstr ""
+msgstr "Hvilken som helst facilitet"
 
 #: peeringdb_server/org_admin_views.py:143
 msgid "Any Exchange"
-msgstr ""
+msgstr "Hvilken som helst exchange"
 
 #: peeringdb_server/org_admin_views.py:147
 #, python-format
@@ -896,12 +889,12 @@ msgstr "Vi kunne ikke finde en RIR registrering for dette ASN"
 #: peeringdb_server/serializers.py:229
 #, python-format
 msgid "Object of type '%(type)s' cannot be created because it's parent entity '%(parent_tag)s/%(parent_id)s' has not yet been approved"
-msgstr ""
+msgstr "Objekter af denne type '%(type)s' kan ikke oprettes fordi dets hovedobjekt '%(parent_tag)s/%(parent_id)s' ikke er blevet godkendt endnu"
 
 #: peeringdb_server/serializers.py:237
 #, python-format
 msgid "Object of type '%(type)s' cannot be created because it's parent entity '%(parent_tag)s/%(parent_id)s' has been marked as deleted"
-msgstr ""
+msgstr "Objekter af denne type '%(type)s' kan ikke oprettes fordi dets hovedobjekt '%(parent_tag)s/%(parent_id)s' er blevet markeret som slettet"
 
 #: peeringdb_server/signals.py:161
 #, python-format
@@ -951,17 +944,16 @@ msgstr "i stedet for"
 #: peeringdb_server/templates/admin/peeringdb_server/commandlinetool/prepare_command.html:18
 #: peeringdb_server/templates/admin/peeringdb_server/commandlinetool/preview_command.html:16
 #: peeringdb_server/templates/admin/peeringdb_server/commandlinetool/run_command.html:16
-#, fuzzy
 msgid "Home"
-msgstr "Hjem"
+msgstr "Forside"
 
 #: peeringdb_server/templates/admin/peeringdb_server/commandlinetool/prepare_command.html:22
 msgid "Prepare"
-msgstr ""
+msgstr "Forbered"
 
 #: peeringdb_server/templates/admin/peeringdb_server/commandlinetool/preview_command.html:20
 msgid "Preview"
-msgstr ""
+msgstr "Forhåndsvisning"
 
 #: peeringdb_server/templates/admin/peeringdb_server/commandlinetool/run_command.html:20
 msgid "Result"
@@ -981,7 +973,6 @@ msgid "has been merged into"
 msgstr "er blevet sammenlagt med"
 
 #: peeringdb_server/templates/email/notify-org-admin-merge.txt:11
-#, fuzzy
 msgid "All merges are processed manually by peeringdb support staff. If you think this action has been executed in error please dont hesitate to contact peeringdb support at"
 msgstr "Alle sammenlægninger bliver udført af PeeringDB support. Hvis du mener der sket en fejlagtig sammenlægning. Hold dig ikke tilbage og kontakt PeeringDB support vha."
 
@@ -1016,27 +1007,27 @@ msgstr "Som organisations administrator kan du godkende eller afvise denne fores
 
 #: peeringdb_server/templates/email/notify-pdb-admin-asnauto-affil.txt:3
 msgid "Ownership of organization was automatically granted to user"
-msgstr ""
+msgstr "Ejerskab af denne organisation er automatisk blevet tildelt til bruger"
 
 #: peeringdb_server/templates/email/notify-pdb-admin-asnauto-affil.txt:5
 #: peeringdb_server/templates/site/view_organization_tools.html:496
 #: peeringdb_server/templates/site/view_organization_tools.html:542
 msgid "User"
-msgstr ""
+msgstr "Bruger"
 
 #: peeringdb_server/templates/email/notify-pdb-admin-asnauto-affil.txt:7
 #: peeringdb_server/templates/site/view_organization_side.html:113
 msgid "Network"
-msgstr ""
+msgstr "Netværk"
 
 #: peeringdb_server/templates/email/notify-pdb-admin-asnauto-affil.txt:7
 msgid "AS"
-msgstr ""
+msgstr "AS"
 
 #: peeringdb_server/templates/email/notify-pdb-admin-asnauto-entity-creation.txt:4
 #, python-format
 msgid "Organization %(o_name)s (%(o_id)s) was automatically created during user '%(u_name)s's affiliation request to AS%(asn)s"
-msgstr ""
+msgstr "Organisation %(o_name)s (%(o_id)s) blev automatisk oprettet i forbindelse med bruger '%(u_name)s's tilknytningsforespørgsel til AS%(asn)s"
 
 #: peeringdb_server/templates/email/notify-pdb-admin-asnauto-entity-creation.txt:9
 #, python-format
@@ -1109,11 +1100,11 @@ msgstr ""
 
 #: peeringdb_server/templates/email/notify-pdb-admin-user-affil.txt:37
 msgid "ADMIN"
-msgstr ""
+msgstr "Administrator"
 
 #: peeringdb_server/templates/email/notify-pdb-admin-user-affil.txt:39
 msgid "MEMBER"
-msgstr ""
+msgstr "Medlem"
 
 #: peeringdb_server/templates/email/notify-pdb-admin-user-affil.txt:44
 msgid "Review Affiliation/Ownership Request"
@@ -1160,19 +1151,19 @@ msgstr ""
 #: peeringdb_server/templates/site/view_organization_tools.html:495
 #: peeringdb_server/templates/site/view_organization_tools.html:541
 msgid "Name"
-msgstr ""
+msgstr "JNavn"
 
 #: peeringdb_server/templates/email/notify-pdb-admin-vq.txt:14
 msgid "Requested by user"
-msgstr ""
+msgstr "Forespurgt af bruger"
 
 #: peeringdb_server/templates/email/notify-pdb-admin-vq.txt:16
 msgid "You can go to"
-msgstr ""
+msgstr "Du kan go her"
 
 #: peeringdb_server/templates/email/notify-pdb-admin-vq.txt:16
 msgid "to view and approve or deny this entry"
-msgstr ""
+msgstr "for at se og godkendte eller afvise denne post"
 
 #: peeringdb_server/templates/email/notify-sponsorship-admin-expiration.txt:2
 #, python-format
@@ -1194,11 +1185,11 @@ msgstr ""
 
 #: peeringdb_server/templates/email/notify-user-uoar-ownership-approved.txt:13
 msgid "You may view and edit your organization at"
-msgstr ""
+msgstr "Du kan se og lave ændringer for din organisation på"
 
 #: peeringdb_server/templates/email/notify-user-uoar-ownership-approved.txt:15
 msgid "If you have questions, please don't hesitate to contact peeringdb support at"
-msgstr ""
+msgstr "Hvis du har spørgsmål, kontakt meget gerne peeringdb support på"
 
 #: peeringdb_server/templates/email/password-reset.txt:2
 msgid "You initiated a password reset on PeeringDB 2 - Please follow the url below to reset your password."
@@ -1222,7 +1213,7 @@ msgstr ""
 
 #: peeringdb_server/templates/site/advanced-search-fac.html:21
 msgid "Address"
-msgstr ""
+msgstr "Adresse"
 
 #: peeringdb_server/templates/site/advanced-search-fac.html:30
 #: peeringdb_server/templates/site/advanced-search-fac.html:147
@@ -1240,17 +1231,17 @@ msgstr ""
 #: peeringdb_server/templates/site/view_organization_tools.html:374
 #: peeringdb_server/views.py:1051
 msgid "City"
-msgstr ""
+msgstr "By"
 
 #: peeringdb_server/templates/site/advanced-search-fac.html:30
 #: peeringdb_server/templates/site/advanced-search-fac.html:151
 #: peeringdb_server/templates/site/view_organization_tools.html:104
 msgid "State"
-msgstr ""
+msgstr "Stat"
 
 #: peeringdb_server/templates/site/advanced-search-fac.html:30
 msgid "Postal"
-msgstr ""
+msgstr "Postnummer"
 
 #: peeringdb_server/templates/site/advanced-search-fac.html:55
 #: peeringdb_server/templates/site/advanced-search-fac.html:148
@@ -1268,7 +1259,7 @@ msgstr ""
 #: peeringdb_server/templates/site/view_organization_tools.html:383
 #: peeringdb_server/views.py:1057
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #: peeringdb_server/templates/site/advanced-search-fac.html:55
 #: peeringdb_server/templates/site/advanced-search-ix.html:29
@@ -1280,7 +1271,7 @@ msgstr ""
 #: peeringdb_server/templates/site/advanced-search-net.html:78
 #: peeringdb_server/templates/site/advanced-search-net.html:90
 msgid "click to select multiple"
-msgstr ""
+msgstr "klik for at vælge flere"
 
 #: peeringdb_server/templates/site/advanced-search-fac.html:71
 #: peeringdb_server/templates/site/advanced-search-fac.html:140
@@ -1290,30 +1281,30 @@ msgstr ""
 #: peeringdb_server/templates/site/advanced-search-fac.html:81
 #: peeringdb_server/templates/site/advanced-search-fac.html:143
 msgid "CLLI"
-msgstr ""
+msgstr "CLLI"
 
 #: peeringdb_server/templates/site/advanced-search-fac.html:91
 #: peeringdb_server/templates/site/advanced-search-fac.html:144
 #: peeringdb_server/templates/site/view_organization_tools.html:142
 #: peeringdb_server/views.py:987
 msgid "NPA-NXX"
-msgstr ""
+msgstr "NPA-NXX"
 
 #: peeringdb_server/templates/site/advanced-search-fac.html:103
 #: peeringdb_server/templates/site/advanced-search-ix.html:79
 #: peeringdb_server/templates/site/advanced-search-net.html:104
 msgid "Reset"
-msgstr ""
+msgstr "Nulstil"
 
 #: peeringdb_server/templates/site/advanced-search-fac.html:104
 #: peeringdb_server/templates/site/advanced-search-ix.html:80
 #: peeringdb_server/templates/site/advanced-search-net.html:105
 msgid "Search"
-msgstr ""
+msgstr "Søg"
 
 #: peeringdb_server/templates/site/advanced-search-fac.html:152
 msgid "Postal Code"
-msgstr ""
+msgstr "Postnummer"
 
 #: peeringdb_server/templates/site/advanced-search-fac.html:155
 #: peeringdb_server/templates/site/advanced-search.html:11
@@ -1321,13 +1312,13 @@ msgstr ""
 #: peeringdb_server/templates/site/search_result_frame.html:10
 #: peeringdb_server/templates/site/view_facility_bottom.html:23
 msgid "Networks"
-msgstr ""
+msgstr "Netværk"
 
 #: peeringdb_server/templates/site/advanced-search-fac.html:162
 #: peeringdb_server/templates/site/advanced-search-ix.html:110
 #: peeringdb_server/templates/site/advanced-search-net.html:165
 msgid "Nothing matched your search criteria."
-msgstr ""
+msgstr "Intet svarede til dine søgekriterier"
 
 #: peeringdb_server/templates/site/advanced-search-fac.html:171
 #: peeringdb_server/templates/site/advanced-search-ix.html:119
@@ -1344,57 +1335,57 @@ msgstr ""
 
 #: peeringdb_server/templates/site/advanced-search-ix.html:57
 msgid "IP Block"
-msgstr ""
+msgstr "IP block"
 
 #: peeringdb_server/templates/site/advanced-search-ix.html:66
 #: peeringdb_server/templates/site/advanced-search-ix.html:103
 #: peeringdb_server/templates/site/view_organization_tools.html:404
 #: peeringdb_server/views.py:1069
 msgid "Media Type"
-msgstr ""
+msgstr "Medie type"
 
 #: peeringdb_server/templates/site/advanced-search-net.html:20
 #: peeringdb_server/templates/site/advanced-search-net.html:149
 #: peeringdb_server/templates/site/view_organization_tools.html:210
 #: peeringdb_server/views.py:1273
 msgid "Network Type"
-msgstr ""
+msgstr "Netværks type"
 
 #: peeringdb_server/templates/site/advanced-search-net.html:31
 #: peeringdb_server/templates/site/advanced-search-net.html:153
 #: peeringdb_server/templates/site/view_organization_tools.html:219
 #: peeringdb_server/views.py:1293
 msgid "Traffic Levels"
-msgstr ""
+msgstr "Trafik niveauer"
 
 #: peeringdb_server/templates/site/advanced-search-net.html:43
 #: peeringdb_server/templates/site/advanced-search-net.html:154
 msgid "Traffic Ratio"
-msgstr ""
+msgstr "Trafik fordeling"
 
 #: peeringdb_server/templates/site/advanced-search-net.html:58
 #: peeringdb_server/templates/site/view_organization_tools.html:192
 #: peeringdb_server/views.py:1248
 msgid "Primary ASN"
-msgstr ""
+msgstr "Primær ASN"
 
 #: peeringdb_server/templates/site/advanced-search-net.html:68
 msgid "IRR Macro"
-msgstr ""
+msgstr "IRR Macro"
 
 #: peeringdb_server/templates/site/advanced-search-net.html:78
 msgid "General Peering Policy"
-msgstr ""
+msgstr "General peering politik"
 
 #: peeringdb_server/templates/site/advanced-search-net.html:90
 #: peeringdb_server/templates/site/view_organization_tools.html:237
 #: peeringdb_server/views.py:1307
 msgid "Geographic Scope"
-msgstr ""
+msgstr "Geografisk udbredelse"
 
 #: peeringdb_server/templates/site/advanced-search-net.html:142
 msgid "Also known as"
-msgstr ""
+msgstr "Også kendt som"
 
 #: peeringdb_server/templates/site/advanced-search-net.html:145
 #: peeringdb_server/templates/site/verify.html:106
@@ -1409,13 +1400,13 @@ msgstr ""
 #: peeringdb_server/templates/site/view_organization_side.html:97
 #: peeringdb_server/templates/site/view_organization_side.html:108
 msgid "ASN"
-msgstr ""
+msgstr "ASN"
 
 #: peeringdb_server/templates/site/advanced-search-net.html:146
 #: peeringdb_server/templates/site/view_organization_tools.html:277
 #: peeringdb_server/views.py:1365
 msgid "General Policy"
-msgstr ""
+msgstr "General politik"
 
 #: peeringdb_server/templates/site/advanced-search-net.html:150
 msgid "Network Scope"
@@ -1427,14 +1418,14 @@ msgstr ""
 #: peeringdb_server/templates/site/search_result_frame.html:6
 #: peeringdb_server/templates/site/view_organization_side.html:153
 msgid "Exchanges"
-msgstr ""
+msgstr "Exchanges"
 
 #: peeringdb_server/templates/site/advanced-search-net.html:158
 #: peeringdb_server/templates/site/advanced-search.html:14
 #: peeringdb_server/templates/site/search_result.html:24
 #: peeringdb_server/templates/site/search_result_frame.html:14
 msgid "Facilities"
-msgstr ""
+msgstr "Faciliteter"
 
 #: peeringdb_server/templates/site/aup.html:7
 msgid "The PeeringDB Acceptable Use Policy explicitly states the parameters that copyright extends to:"
@@ -1463,27 +1454,27 @@ msgstr ""
 
 #: peeringdb_server/templates/site/entity_create.html:10
 msgid "Submit"
-msgstr ""
+msgstr "Indsend"
 
 #: peeringdb_server/templates/site/error.html:23
 msgid "404 - Not Found"
-msgstr ""
+msgstr "404 - Ikke fundet"
 
 #: peeringdb_server/templates/site/error.html:24
 msgid "The page you requested does not exist."
-msgstr ""
+msgstr "Siden du forespurgte eksistere ikke"
 
 #: peeringdb_server/templates/site/error.html:26
 msgid "403 - Forbidden"
-msgstr ""
+msgstr "403 - Forbudt"
 
 #: peeringdb_server/templates/site/error.html:27
 msgid "You dont have permissions to view this page."
-msgstr ""
+msgstr "Du har ikke rettigheder til at se denne side"
 
 #: peeringdb_server/templates/site/error.html:29
 msgid "Take me home"
-msgstr ""
+msgstr "Tag mig til forsiden"
 
 #: peeringdb_server/templates/site/footer.html:9
 msgid "All Rights Reserved. By using this service, you agree to adhere to our"
@@ -1491,7 +1482,7 @@ msgstr ""
 
 #: peeringdb_server/templates/site/footer.html:10
 msgid "AUP"
-msgstr ""
+msgstr "AUP"
 
 #: peeringdb_server/templates/site/footer.html:23
 #: peeringdb_server/templates/site/sponsorships.html:12
@@ -1499,40 +1490,40 @@ msgstr ""
 #: peeringdb_server/templates/site/sponsorships.html:43
 #: peeringdb_server/templates/site/sponsorships.html:56
 msgid "Sponsors"
-msgstr ""
+msgstr "Sponsorer"
 
 #: peeringdb_server/templates/site/footer.html:26
 #: peeringdb_server/templates/site/partnerships.html:13
 msgid "Partners"
-msgstr ""
+msgstr "Partnere"
 
 #: peeringdb_server/templates/site/footer.html:29
 msgid "Resources"
-msgstr ""
+msgstr "Ressourcer"
 
 #: peeringdb_server/templates/site/footer.html:33
 msgid "Documentation"
-msgstr ""
+msgstr "Dokumentation"
 
 #: peeringdb_server/templates/site/footer.html:36
 msgid "API Documentation"
-msgstr ""
+msgstr "API dokumentation"
 
 #: peeringdb_server/templates/site/footer.html:39
 msgid "Contact Us"
-msgstr ""
+msgstr "Kontakt os"
 
 #: peeringdb_server/templates/site/footer.html:43
 msgid "Global System Statistics"
-msgstr ""
+msgstr "Globale system statistikker"
 
 #: peeringdb_server/templates/site/footer.html:45
 msgid "Peering Networks"
-msgstr ""
+msgstr "Peering netværk"
 
 #: peeringdb_server/templates/site/footer.html:46
 msgid "Public Exchange Points"
-msgstr ""
+msgstr "Offentlige exchange punkter"
 
 #: peeringdb_server/templates/site/footer.html:47
 msgid "Unique Public Exchange Presences"
@@ -1540,11 +1531,11 @@ msgstr ""
 
 #: peeringdb_server/templates/site/footer.html:48
 msgid "Private Facilities"
-msgstr ""
+msgstr "Private faciliteter"
 
 #: peeringdb_server/templates/site/footer.html:49
 msgid "Private Facility Presences"
-msgstr ""
+msgstr "Tilstedeværelse i private faciliteter"
 
 #: peeringdb_server/templates/site/header.html:51
 msgid "Search here for a network, IX, or facility."
