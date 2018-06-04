@@ -3,31 +3,31 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-31 22:32+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2018-06-01 15:30+0200\n"
+"Language: da_DK\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Christoffer <netravnen@gmail.com>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: django_peeringdb/const.py:3
 msgid "Ethernet"
-msgstr ""
+msgstr "Ethernet"
 
 #: django_peeringdb/const.py:4
 msgid "ATM"
-msgstr ""
+msgstr "ATM"
 
 #: django_peeringdb/const.py:5
 msgid "Multiple"
-msgstr ""
+msgstr "Flere"
 
 #: django_peeringdb/const.py:8
 msgid "Abuse"
@@ -35,33 +35,33 @@ msgstr ""
 
 #: django_peeringdb/const.py:9
 msgid "Maintenance"
-msgstr ""
+msgstr "Vedligehold"
 
 #: django_peeringdb/const.py:10
 #: peeringdb_server/templates/site/view_exchange_side.html:26
 #: peeringdb_server/templates/site/view_exchange_side.html:37
 msgid "Policy"
-msgstr ""
+msgstr "Politik"
 
 #: django_peeringdb/const.py:11
 msgid "Technical"
-msgstr ""
+msgstr "Teknisk"
 
 #: django_peeringdb/const.py:12
 msgid "NOC"
-msgstr ""
+msgstr "NOC"
 
 #: django_peeringdb/const.py:13
 msgid "Public Relations"
-msgstr ""
+msgstr "Offentlige relationer"
 
 #: django_peeringdb/const.py:14
 msgid "Sales"
-msgstr ""
+msgstr "Salg"
 
 #: django_peeringdb/const.py:18
 msgid "Open"
-msgstr ""
+msgstr "Åben"
 
 #: django_peeringdb/const.py:19
 msgid "Selective"
@@ -69,48 +69,48 @@ msgstr ""
 
 #: django_peeringdb/const.py:20
 msgid "Restrictive"
-msgstr ""
+msgstr "Restrektiv"
 
 #: django_peeringdb/const.py:21 peeringdb_server/data_views.py:47
 #: peeringdb_server/data_views.py:48
 #: peeringdb_server/templates/site/view_organization_tools.html:516
 msgid "No"
-msgstr ""
+msgstr "Nej"
 
 #: django_peeringdb/const.py:22 django_peeringdb/const.py:28
 msgid "Not Required"
-msgstr ""
+msgstr "Ikke påkrævet"
 
 #: django_peeringdb/const.py:23
 msgid "Preferred"
-msgstr ""
+msgstr "Foretrukken"
 
 #: django_peeringdb/const.py:24
 msgid "Required - US"
-msgstr ""
+msgstr "Foretrukken - USA"
 
 #: django_peeringdb/const.py:25
 msgid "Required - EU"
-msgstr ""
+msgstr "Foretrukken - EU"
 
 #: django_peeringdb/const.py:27
 msgid "Required - International"
-msgstr ""
+msgstr "Foretrukken - International"
 
 #: django_peeringdb/const.py:29
 msgid "Private Only"
-msgstr ""
+msgstr "Kun privat"
 
 #: django_peeringdb/const.py:30
 msgid "Required"
-msgstr ""
+msgstr "Påkrævet"
 
 #: django_peeringdb/const.py:33
 #: peeringdb_server/templates/site/view_exchange_side.html:21
 #: peeringdb_server/templates/site/view_network_side.html:27
 #: peeringdb_server/templates/site/view_network_side.html:147
 msgid "IPv4"
-msgstr ""
+msgstr "IPv4"
 
 #: django_peeringdb/const.py:34
 #: peeringdb_server/templates/site/view_exchange_side.html:22
@@ -120,7 +120,7 @@ msgstr ""
 #: peeringdb_server/templates/site/view_organization_tools.html:430
 #: peeringdb_server/views.py:1084 peeringdb_server/views.py:1322
 msgid "IPv6"
-msgstr ""
+msgstr "IPv6"
 
 #: django_peeringdb/const.py:38 django_peeringdb/const.py:39
 #: django_peeringdb/const.py:56 django_peeringdb/const.py:57
@@ -129,31 +129,31 @@ msgstr ""
 #: peeringdb_server/views.py:1292 peeringdb_server/views.py:1300
 #: peeringdb_server/views.py:1306
 msgid "Not Disclosed"
-msgstr ""
+msgstr "Ikke offentliggjort"
 
 #: django_peeringdb/const.py:40
 msgid "Heavy Outbound"
-msgstr ""
+msgstr "Meget udgående"
 
 #: django_peeringdb/const.py:41
 msgid "Mostly Outbound"
-msgstr ""
+msgstr "Mest udgående"
 
 #: django_peeringdb/const.py:42
 msgid "Balanced"
-msgstr ""
+msgstr "Balanceret"
 
 #: django_peeringdb/const.py:43
 msgid "Mostly Inbound"
-msgstr ""
+msgstr "Meget indgående"
 
 #: django_peeringdb/const.py:44
 msgid "Heavy Inbound"
-msgstr ""
+msgstr "Mest indgående"
 
 #: django_peeringdb/const.py:47 django_peeringdb/const.py:59
 msgid "North America"
-msgstr ""
+msgstr "Nord Amerika"
 
 #: django_peeringdb/const.py:48 django_peeringdb/const.py:60
 msgid "Asia Pacific"
@@ -161,103 +161,103 @@ msgstr ""
 
 #: django_peeringdb/const.py:49 django_peeringdb/const.py:61
 msgid "Europe"
-msgstr ""
+msgstr "Europa"
 
 #: django_peeringdb/const.py:50 django_peeringdb/const.py:62
 msgid "South America"
-msgstr ""
+msgstr "Syd Amerika"
 
 #: django_peeringdb/const.py:51 django_peeringdb/const.py:63
 msgid "Africa"
-msgstr ""
+msgstr "Afrika"
 
 #: django_peeringdb/const.py:52 django_peeringdb/const.py:64
 msgid "Australia"
-msgstr ""
+msgstr "Australien"
 
 #: django_peeringdb/const.py:53 django_peeringdb/const.py:65
 msgid "Middle East"
-msgstr ""
+msgstr "Mellemøsten"
 
 #: django_peeringdb/const.py:58
 msgid "Regional"
-msgstr ""
+msgstr "Regional"
 
 #: django_peeringdb/const.py:66
 msgid "Global"
-msgstr ""
+msgstr "Global"
 
 #: django_peeringdb/const.py:70
 msgid "0-20 Mbps"
-msgstr ""
+msgstr "0-20 Mbps"
 
 #: django_peeringdb/const.py:71
 msgid "20-100Mbps"
-msgstr ""
+msgstr "20-100Mbps"
 
 #: django_peeringdb/const.py:72
 msgid "100-1000Mbps"
-msgstr ""
+msgstr "100-1000Mbps"
 
 #: django_peeringdb/const.py:73
 msgid "1-5Gbps"
-msgstr ""
+msgstr "1-5Gbps"
 
 #: django_peeringdb/const.py:74
 msgid "5-10Gbps"
-msgstr ""
+msgstr "5-10Gbps"
 
 #: django_peeringdb/const.py:75
 msgid "10-20Gbps"
-msgstr ""
+msgstr "10-20Gbps"
 
 #: django_peeringdb/const.py:76
 msgid "20-50 Gbps"
-msgstr ""
+msgstr "20-50 Gbps"
 
 #: django_peeringdb/const.py:77
 msgid "50-100 Gbps"
-msgstr ""
+msgstr "50-100 Gbps"
 
 #: django_peeringdb/const.py:78
 msgid "100+ Gbps"
-msgstr ""
+msgstr "100+ Gbps"
 
 #: django_peeringdb/const.py:79
 msgid "100-200 Gbps"
-msgstr ""
+msgstr "100-200 Gbps"
 
 #: django_peeringdb/const.py:80
 msgid "200-300 Gbps"
-msgstr ""
+msgstr "200-300 Gbps"
 
 #: django_peeringdb/const.py:81
 msgid "300-500 Gbps"
-msgstr ""
+msgstr "300-500 Gbps"
 
 #: django_peeringdb/const.py:82
 msgid "500-1000 Gbps"
-msgstr ""
+msgstr "500-1000 Gbps"
 
 #: django_peeringdb/const.py:83
 msgid "1 Tbps+"
-msgstr ""
+msgstr "1 Tbps+"
 
 #: django_peeringdb/const.py:84
 msgid "10 Tbps+"
-msgstr ""
+msgstr "10 Tbps+"
 
 #: django_peeringdb/const.py:89
 msgid "NSP"
-msgstr ""
+msgstr "NSP"
 
 #: django_peeringdb/const.py:90
 msgid "Content"
-msgstr ""
+msgstr "Indhold"
 
 #: django_peeringdb/const.py:91
 msgid "Cable/DSL/ISP"
-msgstr ""
+msgstr "Kabel/DSL/ISP"
 
 #: django_peeringdb/const.py:92
 msgid "Enterprise"
@@ -273,20 +273,20 @@ msgstr ""
 
 #: django_peeringdb/const.py:95
 msgid "Route Server"
-msgstr ""
+msgstr "Route Server"
 
 #: django_peeringdb/const.py:99
 msgid "Private"
-msgstr ""
+msgstr "Privat"
 
 #: django_peeringdb/const.py:101
 #: peeringdb_server/templates/site/view_organization_tools.html:32
 msgid "Users"
-msgstr ""
+msgstr "Brugere"
 
 #: django_peeringdb/const.py:102
 msgid "Public"
-msgstr ""
+msgstr "Offentlig"
 
 #: mail_test.py:54 peeringdb_server/mail.py:57
 msgid "{} Merge Notification: {} -> {}"
@@ -295,7 +295,7 @@ msgstr ""
 #: peeringdb_server/admin.py:54 peeringdb_server/admin.py:1135
 #: peeringdb_server/templates/site/footer.html:30
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: peeringdb_server/admin.py:133
 msgid "Target org cannot be in selected organizations list"
@@ -303,11 +303,12 @@ msgstr ""
 
 #: peeringdb_server/admin.py:258
 msgid "ROLLBACK"
-msgstr ""
+msgstr "Rul tilbage"
 
 #: peeringdb_server/admin.py:269
+#, fuzzy
 msgid "SOFT DELETE"
-msgstr ""
+msgstr "Flyt til affaldskurv"
 
 #: peeringdb_server/admin.py:340
 msgid "Verification Queue is currently disabled"
@@ -319,27 +320,29 @@ msgstr ""
 
 #: peeringdb_server/admin.py:353
 msgid "APPROVE"
-msgstr ""
+msgstr "GODKEND"
 
 #: peeringdb_server/admin.py:354
 msgid "DENY"
-msgstr ""
+msgstr "AFVIS"
 
 #: peeringdb_server/admin.py:355
 msgid "APPROVED"
-msgstr ""
+msgstr "GODKENDT"
 
 #: peeringdb_server/admin.py:420 peeringdb_server/admin.py:429
+#, fuzzy
 msgid "Ipaddress already exists elsewhere"
-msgstr ""
+msgstr "IP adresse eksistere allerede et andet sted"
 
 #: peeringdb_server/admin.py:448
 msgid "User is looking to be affiliated to these Organizations"
-msgstr ""
+msgstr "Brugeren vil gerne tilknyttes disse organisationer"
 
 #: peeringdb_server/admin.py:479
+#, fuzzy
 msgid "IXF Import History"
-msgstr ""
+msgstr "IXF Import historik"
 
 #: peeringdb_server/admin.py:528
 msgid "Initial creation of netixlan"
@@ -347,23 +350,23 @@ msgstr ""
 
 #: peeringdb_server/admin.py:548
 msgid "CAN BE ROLLED BACK"
-msgstr ""
+msgstr "KAN RULLES TILBAGE"
 
 #: peeringdb_server/admin.py:552 peeringdb_server/admin.py:556
 msgid "CANNOT BE ROLLED BACK"
-msgstr ""
+msgstr "KAN IKKE BLIVE RULLET TILBAGE"
 
 #: peeringdb_server/admin.py:552
 msgid "Has been changed since"
-msgstr ""
+msgstr "Har været ændret siden"
 
 #: peeringdb_server/admin.py:557
 msgid "Netixlan with conflicting ipaddress now exists elsewhere"
-msgstr ""
+msgstr "Netixlan med konfliktende IP adresser eksistere nu andre steder"
 
 #: peeringdb_server/admin.py:560
 msgid "HAS BEEN ROLLED BACK"
-msgstr ""
+msgstr "HAR VÆRET RULLET TILBAGE"
 
 #: peeringdb_server/admin.py:617
 #: peeringdb_server/templates/email/notify-pdb-admin-asnauto-affil.txt:6
@@ -371,19 +374,20 @@ msgstr ""
 #: peeringdb_server/views.py:948 peeringdb_server/views.py:1041
 #: peeringdb_server/views.py:1231
 msgid "Organization"
-msgstr ""
+msgstr "Organisation"
 
 #: peeringdb_server/admin.py:622
+#, fuzzy
 msgid "Not Set"
-msgstr ""
+msgstr "Ikke konfigureret"
 
 #: peeringdb_server/admin.py:626 peeringdb_server/admin.py:657
 msgid "Logo Missing"
-msgstr ""
+msgstr "Logo mangler"
 
 #: peeringdb_server/admin.py:627 peeringdb_server/admin.py:658
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
 #: peeringdb_server/admin.py:629
 msgid "Over"
@@ -391,7 +395,7 @@ msgstr ""
 
 #: peeringdb_server/admin.py:631
 msgid "Waiting"
-msgstr ""
+msgstr "Venter"
 
 #: peeringdb_server/admin.py:688
 msgid "Malformed organization ids"
@@ -403,23 +407,23 @@ msgstr ""
 
 #: peeringdb_server/admin.py:709
 msgid "Organization Merging Tool"
-msgstr ""
+msgstr "Organisations sammenlægningsværktøj"
 
 #: peeringdb_server/admin.py:736 peeringdb_server/admin.py:747
 msgid "Undo merge"
-msgstr ""
+msgstr "Rul sammenlægning tilbage"
 
 #: peeringdb_server/admin.py:816
 msgid "APPROVE selected items"
-msgstr ""
+msgstr "GODKEND valgte poster"
 
 #: peeringdb_server/admin.py:822
 msgid "DENY and delete selected items"
-msgstr ""
+msgstr "AFVIS og slet valgte poster"
 
 #: peeringdb_server/admin.py:827
 msgid "View"
-msgstr ""
+msgstr "Vis"
 
 #: peeringdb_server/admin.py:843
 msgid "Affiliation request was approved and the user was notified."
@@ -427,42 +431,42 @@ msgstr ""
 
 #: peeringdb_server/admin.py:845
 msgid "Approve and notify User"
-msgstr ""
+msgstr "Godkendt og adviser bruger"
 
 #: peeringdb_server/admin.py:851
 #: peeringdb_server/templates/site/view_organization_tools.html:520
 msgid "Approve"
-msgstr ""
+msgstr "Godkend"
 
 #: peeringdb_server/admin.py:857
 #: peeringdb_server/templates/site/view_organization_tools.html:521
 msgid "Deny"
-msgstr ""
+msgstr "Afvis"
 
 #: peeringdb_server/admin.py:926
 #: peeringdb_server/templates/site/verify.html:217
 msgid "Change Password"
-msgstr ""
+msgstr "Ændre kodeord"
 
 #: peeringdb_server/admin.py:936
 msgid "Edit Permissions"
-msgstr ""
+msgstr "Ændre rettigheder"
 
 #: peeringdb_server/admin.py:943
 msgid "VERIFIED"
-msgstr ""
+msgstr "VERIFICERET"
 
 #: peeringdb_server/admin.py:946
 msgid "UNVERIFIED"
-msgstr ""
+msgstr "IKKE VERIFICERET"
 
 #: peeringdb_server/admin.py:962
 msgid "User Permission"
-msgstr ""
+msgstr "Bruger rettighed"
 
 #: peeringdb_server/admin.py:963
 msgid "User Permissions"
-msgstr ""
+msgstr "Bruger rettigheder"
 
 #: peeringdb_server/admin.py:1013
 msgid "Duplicate IP"
@@ -474,7 +478,7 @@ msgstr ""
 
 #: peeringdb_server/admin.py:1141
 msgid "Updated"
-msgstr ""
+msgstr "Opdateret"
 
 #: peeringdb_server/admin.py:1259 peeringdb_server/admin.py:1291
 msgid "Only POST requests allowed."
@@ -482,7 +486,7 @@ msgstr ""
 
 #: peeringdb_server/admin.py:1269
 msgid "{} (Preview)"
-msgstr ""
+msgstr "{} (Forhåndsvisning)"
 
 #: peeringdb_server/admin_commandline_tools.py:136
 msgid "Three leftmost octets of the original prefix - eg. xxx.xxx.xxx"
@@ -495,11 +499,12 @@ msgstr ""
 #: peeringdb_server/data_views.py:47 peeringdb_server/data_views.py:48
 #: peeringdb_server/templates/site/view_organization_tools.html:516
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: peeringdb_server/export_views.py:140
+#, fuzzy
 msgid "Invalid export format"
-msgstr ""
+msgstr "Ugyldigt eksporteringsformat"
 
 #: peeringdb_server/export_views.py:284
 msgid "Invalid tag"
@@ -507,47 +512,47 @@ msgstr ""
 
 #: peeringdb_server/forms.py:21
 msgid "Invalid permission level"
-msgstr ""
+msgstr "Ugyldigt rettighedsniveau"
 
 #: peeringdb_server/forms.py:59
 msgid "ASN needs to be a number"
-msgstr ""
+msgstr "ASN skal være et nummer"
 
 #: peeringdb_server/forms.py:71 peeringdb_server/views.py:694
 msgid "Needs to be at least 10 characters long"
-msgstr ""
+msgstr "Skal være mindst 10 karakter lang"
 
 #: peeringdb_server/forms.py:80
 msgid "Passwords need to match"
-msgstr ""
+msgstr "Kodeord skal være ens"
 
 #: peeringdb_server/models.py:42
 #: peeringdb_server/templates/site/sponsorships.html:56
 msgid "Silver"
-msgstr ""
+msgstr "Sølv"
 
 #: peeringdb_server/models.py:42
 #: peeringdb_server/templates/site/sponsorships.html:43
 msgid "Gold"
-msgstr ""
+msgstr "Guld"
 
 #: peeringdb_server/models.py:42
 #: peeringdb_server/templates/site/sponsorships.html:28
 msgid "Platinum"
-msgstr ""
+msgstr "Platin"
 
 #: peeringdb_server/models.py:43
 #: peeringdb_server/templates/site/sponsorships.html:12
 msgid "Diamond"
-msgstr ""
+msgstr "Diamant"
 
 #: peeringdb_server/models.py:45
 msgid "Data Validation"
-msgstr ""
+msgstr "Data validering"
 
 #: peeringdb_server/models.py:45
 msgid "RIR"
-msgstr ""
+msgstr "RIR"
 
 #: peeringdb_server/models.py:47
 msgid "Renumber IP Space"
@@ -567,11 +572,12 @@ msgstr ""
 
 #: peeringdb_server/models.py:200
 msgid "Address not found"
-msgstr ""
+msgstr "Adresse ikke fundet"
 
 #: peeringdb_server/models.py:208
+#, fuzzy
 msgid "API Timeout"
-msgstr ""
+msgstr "API Timeout"
 
 #: peeringdb_server/models.py:234
 msgid "This organization in our database that was derived from the provided ASN or organization name. If this is empty it means no matching organization was found."
@@ -579,31 +585,31 @@ msgstr ""
 
 #: peeringdb_server/models.py:239
 msgid "The organization name entered by the user"
-msgstr ""
+msgstr "Organisationsnavnet indtastet af brugeren"
 
 #: peeringdb_server/models.py:242
 msgid "The ASN entered by the user"
-msgstr ""
+msgstr "ASN indtastet af brugeren"
 
 #: peeringdb_server/models.py:245
 msgid "The user that made the request"
-msgstr ""
+msgstr "Brugeren der forespurgte"
 
 #: peeringdb_server/models.py:251
 msgid "Pending"
-msgstr ""
+msgstr "Afventer"
 
 #: peeringdb_server/models.py:252
 msgid "Approved"
-msgstr ""
+msgstr "Godkendt"
 
 #: peeringdb_server/models.py:253
 msgid "Denied"
-msgstr ""
+msgstr "Afvist"
 
 #: peeringdb_server/models.py:254
 msgid "Status of this request"
-msgstr ""
+msgstr "Status for denne forespørgsel"
 
 #: peeringdb_server/models.py:258
 msgid "User to Organization Affiliation Request"
@@ -615,7 +621,7 @@ msgstr ""
 
 #: peeringdb_server/models.py:316
 msgid "Your affiliation to Organization \"{}\" has been approved"
-msgstr ""
+msgstr "Din tilknytning til organisation \"{}\" er blevet godkendt"
 
 #: peeringdb_server/models.py:343
 msgid "The item that this queue is attached to was created by this user"
@@ -623,15 +629,15 @@ msgstr ""
 
 #: peeringdb_server/models.py:435
 msgid "Allows you to upload and set a logo image file for this organization"
-msgstr ""
+msgstr "Tillader dig at uploade og ændre logo filen for denne organisation"
 
 #: peeringdb_server/models.py:658
 msgid "Sponsorship starts on"
-msgstr ""
+msgstr "Sponsoraftale starter den"
 
 #: peeringdb_server/models.py:660
 msgid "Sponsorship ends on"
-msgstr ""
+msgstr "Sponsoraftale slutter den"
 
 #: peeringdb_server/models.py:662
 msgid "Expiration notification sent on"
@@ -639,55 +645,57 @@ msgstr ""
 
 #: peeringdb_server/models.py:665 peeringdb_server/models.py:723
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: peeringdb_server/models.py:666
+#, fuzzy
 msgid "If specified clicking the sponsorship will take the user to this location"
-msgstr ""
+msgstr "Hvis konfigureret vil klik på sponsorlogo føre brugeren til denne URL"
 
 #: peeringdb_server/models.py:671
 msgid "Allows you to upload and set a logo image file for this sponsorship"
-msgstr ""
+msgstr "Tillader dig at uploade og ændre logo filen for denne sponsoraftale"
 
 #: peeringdb_server/models.py:676
 msgid "Sponsorship"
-msgstr ""
+msgstr "Sponsoraftale"
 
 #: peeringdb_server/models.py:677
 msgid "Sponsorships"
-msgstr ""
+msgstr "Sponsoraftaler"
 
 #: peeringdb_server/models.py:701
 msgid "Sponsorship Expired"
-msgstr ""
+msgstr "Sponsoraftale udløbet"
 
 #: peeringdb_server/models.py:724
+#, fuzzy
 msgid "If specified clicking the partnership will take the user to this location"
-msgstr ""
+msgstr "Hvis konfigureret vil klik på partnerlogo føre brugeren til denne URL"
 
 #: peeringdb_server/models.py:729
 msgid "Allows you to upload and set a logo image file for this partnership"
-msgstr ""
+msgstr "Tillader dig at uploade og ændre logo filen for denne partneraftale"
 
 #: peeringdb_server/models.py:734
 msgid "Partnership"
-msgstr ""
+msgstr "Partneraftale"
 
 #: peeringdb_server/models.py:735
 msgid "Partnerships"
-msgstr ""
+msgstr "Partneraftaler"
 
 #: peeringdb_server/models.py:750
 msgid "Merged on"
-msgstr ""
+msgstr "Sammenlagt den"
 
 #: peeringdb_server/models.py:754
 msgid "Organization Merge"
-msgstr ""
+msgstr "Organisationer sammenlægning"
 
 #: peeringdb_server/models.py:755
 msgid "Organization Merges"
-msgstr ""
+msgstr "Organisationer sammenlægninger"
 
 #: peeringdb_server/models.py:808
 msgid "Organization Merge: Entity"
@@ -699,19 +707,20 @@ msgstr ""
 
 #: peeringdb_server/models.py:911 peeringdb_server/models.py:1110
 msgid "Need to specify at least two asns"
-msgstr ""
+msgstr "Mangler at specificerer mindst 2 ASNs"
 
 #: peeringdb_server/models.py:914 peeringdb_server/models.py:1113
 msgid "Can only compare a maximum of 25 asns"
-msgstr ""
+msgstr "Kan sammenligne maksimalt 25 ASNs"
 
 #: peeringdb_server/models.py:1318
 msgid "No JSON could be parsed"
-msgstr ""
+msgstr "Intet JSON kunne fortolkes"
 
 #: peeringdb_server/models.py:1344
+#, fuzzy
 msgid "No entries in any of the vlan_list lists, aborting."
-msgstr ""
+msgstr "Ingen poster i nogen af vlan_list listerne, annullere."
 
 #: peeringdb_server/models.py:1709
 msgid "IXF Import Log"
@@ -731,35 +740,35 @@ msgstr ""
 
 #: peeringdb_server/models.py:1847
 msgid "Sepcifies whether an ixp is allowed to add a netixlan entry for this network via their ixp_member data"
-msgstr ""
+msgstr "Specificerer om en IXP kan tilføje en netixlan post for dette netværk via deres ixp_member data"
 
 #: peeringdb_server/models.py:2283 peeringdb_server/models.py:2285
 msgid "Ip address already exists elsewhere"
-msgstr ""
+msgstr "IP adresse eksistere allerede et andet sted"
 
 #: peeringdb_server/models.py:2296
 msgid "username"
-msgstr ""
+msgstr "brugernavn"
 
 #: peeringdb_server/models.py:2297
 msgid "Required. Letters, digits and [@.+-/_=|] only."
-msgstr ""
+msgstr "Påkrævet. Kun bogstaver, tal og [@.+-/_=|]"
 
 #: peeringdb_server/models.py:2300
 msgid "Enter a valid username."
-msgstr ""
+msgstr "Indtast gyldigt brugernavn."
 
 #: peeringdb_server/models.py:2303
 msgid "email address"
-msgstr ""
+msgstr "e-mail adresse"
 
 #: peeringdb_server/models.py:2304
 msgid "first name"
-msgstr ""
+msgstr "fornavn"
 
 #: peeringdb_server/models.py:2305
 msgid "last name"
-msgstr ""
+msgstr "efternavn"
 
 #: peeringdb_server/models.py:2307
 msgid "staff status"
@@ -767,43 +776,44 @@ msgstr ""
 
 #: peeringdb_server/models.py:2308
 msgid "Designates whether the user can log into admin site."
-msgstr ""
+msgstr "Angiver om brugeren kan logge ind på administrator sektionen."
 
 #: peeringdb_server/models.py:2310
 msgid "active"
-msgstr ""
+msgstr "aktiv"
 
 #: peeringdb_server/models.py:2311
 msgid "Designates whether this user should be treated as active. Unselect this instead of deleting accounts."
-msgstr ""
+msgstr "Angiver om brugeren skal behandles som aktiv. Fjern denne markering i stedet for at slette kontoen."
 
 #: peeringdb_server/models.py:2313
+#, fuzzy
 msgid "date joined"
-msgstr ""
+msgstr "første gang aktiv"
 
 #: peeringdb_server/models.py:2316
 msgid "status"
-msgstr ""
+msgstr "status"
 
 #: peeringdb_server/models.py:2318
 msgid "language"
-msgstr ""
+msgstr "sprog"
 
 #: peeringdb_server/models.py:2327
 msgid "user"
-msgstr ""
+msgstr "bruger"
 
 #: peeringdb_server/models.py:2328
 msgid "users"
-msgstr ""
+msgstr "brugere"
 
 #: peeringdb_server/models.py:2520
 msgid "Password Reset Initiated"
-msgstr ""
+msgstr "Nulstilling af kodeord startet"
 
 #: peeringdb_server/models.py:2588
 msgid "name of the tool"
-msgstr ""
+msgstr "navn på værktøj"
 
 #: peeringdb_server/models.py:2591
 msgid "json serialization of arguments and options passed"
@@ -815,15 +825,16 @@ msgstr ""
 
 #: peeringdb_server/models.py:2594
 msgid "the user that ran this command"
-msgstr ""
+msgstr "brugeren der kørte denne kommando"
 
 #: peeringdb_server/models.py:2598
 msgid "command was run at this date and time"
-msgstr ""
+msgstr "kommandoen blev kørt på denne dato og dette tidspunkt"
 
 #: peeringdb_server/org_admin_views.py:140
+#, fuzzy
 msgid "Organization and all Entities it owns"
-msgstr ""
+msgstr "Organisation og alle entiteter den ejer"
 
 #: peeringdb_server/org_admin_views.py:141
 msgid "Any Network"
@@ -840,47 +851,47 @@ msgstr ""
 #: peeringdb_server/org_admin_views.py:147
 #, python-format
 msgid "Network - %(net_name)s"
-msgstr ""
+msgstr "Netværk - %(net_name)s"
 
 #: peeringdb_server/org_admin_views.py:152
 #, python-format
 msgid "Exchange - %(ix_name)s"
-msgstr ""
+msgstr "Exchange - %(ix_name)s"
 
 #: peeringdb_server/org_admin_views.py:157
 #, python-format
 msgid "Facility - %(fac_name)s"
-msgstr ""
+msgstr "Facility - %(fac_name)s"
 
 #: peeringdb_server/org_admin_views.py:216
 msgid "Invalid organization specified"
-msgstr ""
+msgstr "Ugyldig organisation valgt"
 
 #: peeringdb_server/org_admin_views.py:309
 msgid "Needs to be member or admin"
-msgstr ""
+msgstr "Skal være medlem eller administrator"
 
 #: peeringdb_server/org_admin_views.py:448
 #, python-format
 msgid "%(user_name)s's afilliation request has been approved"
-msgstr ""
+msgstr "%(user_name)s's forespørgsel på tilknytning er blevet godkendt"
 
 #: peeringdb_server/org_admin_views.py:502
 #, python-format
 msgid "%(user_name)s's afilliation request has been denied"
-msgstr ""
+msgstr "%(user_name)s's forespørgsel på tilknytning er blevet afvist"
 
 #: peeringdb_server/serializers.py:121
 msgid "Need to be unique"
-msgstr ""
+msgstr "Skal være unique"
 
 #: peeringdb_server/serializers.py:151
 msgid "This field is required"
-msgstr ""
+msgstr "Dette felt er påkrævet"
 
 #: peeringdb_server/serializers.py:176
 msgid "We could not find the RiR entry for this ASN"
-msgstr ""
+msgstr "Vi kunne ikke finde en RIR registrering for dette ASN"
 
 #: peeringdb_server/serializers.py:229
 #, python-format
@@ -895,27 +906,27 @@ msgstr ""
 #: peeringdb_server/signals.py:161
 #, python-format
 msgid "User %(u_name)s wishes to be affiliated to your Organization"
-msgstr ""
+msgstr "Bruger %(u_name)s ønsker at blive tilknyttet din organisation"
 
 #: peeringdb_server/templates/account/email_confirm.html:13
 msgid "Confirm your e-mail address"
-msgstr ""
+msgstr "Bekræft din e-mail adresse"
 
 #: peeringdb_server/templates/account/email_confirm.html:15
 msgid "Please confirm that"
-msgstr ""
+msgstr "Bekræft det venligst"
 
 #: peeringdb_server/templates/account/email_confirm.html:15
 msgid "is your email-address"
-msgstr ""
+msgstr "er din e-mail adresse"
 
 #: peeringdb_server/templates/account/email_confirm.html:19
 msgid "Confirm"
-msgstr ""
+msgstr "Bekræft"
 
 #: peeringdb_server/templates/account/email_confirm.html:23
 msgid "The email confirmation process for this email address has been terminated, please re-initate"
-msgstr ""
+msgstr "E-mail bekræftelsesprocessen for denne e-mail er blevet afbrudt. Prøv igen"
 
 #: peeringdb_server/templates/account/email_confirm.html:23
 #: peeringdb_server/templates/site/request-ownership.html:25
@@ -923,25 +934,26 @@ msgstr ""
 #: peeringdb_server/templates/site/verification_banner.html:11
 #: peeringdb_server/templates/site/verification_banner.html:14
 msgid "here"
-msgstr ""
+msgstr "her"
 
 #: peeringdb_server/templates/account/login.html:7
 msgid "Please use"
-msgstr ""
+msgstr "Brug venligst"
 
 #: peeringdb_server/templates/account/login.html:7
 msgid "this page"
-msgstr ""
+msgstr "denne side"
 
 #: peeringdb_server/templates/account/login.html:7
 msgid "instead"
-msgstr ""
+msgstr "i stedet for"
 
 #: peeringdb_server/templates/admin/peeringdb_server/commandlinetool/prepare_command.html:18
 #: peeringdb_server/templates/admin/peeringdb_server/commandlinetool/preview_command.html:16
 #: peeringdb_server/templates/admin/peeringdb_server/commandlinetool/run_command.html:16
+#, fuzzy
 msgid "Home"
-msgstr ""
+msgstr "Hjem"
 
 #: peeringdb_server/templates/admin/peeringdb_server/commandlinetool/prepare_command.html:22
 msgid "Prepare"
@@ -953,53 +965,54 @@ msgstr ""
 
 #: peeringdb_server/templates/admin/peeringdb_server/commandlinetool/run_command.html:20
 msgid "Result"
-msgstr ""
+msgstr "Resultat"
 
 #: peeringdb_server/templates/email/notify-org-admin-merge.txt:2
 msgid "Merge Notification"
-msgstr ""
+msgstr "Sammenlægningsnotifikation"
 
 #: peeringdb_server/templates/email/notify-org-admin-merge.txt:4
 #: peeringdb_server/templates/email/notify-org-admin-merge.txt:8
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: peeringdb_server/templates/email/notify-org-admin-merge.txt:6
 msgid "has been merged into"
-msgstr ""
+msgstr "er blevet sammenlagt med"
 
 #: peeringdb_server/templates/email/notify-org-admin-merge.txt:11
+#, fuzzy
 msgid "All merges are processed manually by peeringdb support staff. If you think this action has been executed in error please dont hesitate to contact peeringdb support at"
-msgstr ""
+msgstr "Alle sammenlægninger bliver udført af PeeringDB support. Hvis du mener der sket en fejlagtig sammenlægning. Hold dig ikke tilbage og kontakt PeeringDB support vha."
 
 #: peeringdb_server/templates/email/notify-org-admin-user-affil-approved.txt:3
 #, python-format
 msgid "%(u_full_name)s's affiliation request to %(o_name)s has been APPROVED by %(admin_full_name)s."
-msgstr ""
+msgstr "%(u_full_name)s's forespørgsel om tilknytning til %(o_name)s er blevet GODKENDT af %(admin_full_name)s."
 
 #: peeringdb_server/templates/email/notify-org-admin-user-affil-approved.txt:7
 #: peeringdb_server/templates/email/notify-org-admin-user-affil-denied.txt:7
 msgid "No further action is required on your part."
-msgstr ""
+msgstr "Ingen yderligere handlinger er påkrævet af dig."
 
 #: peeringdb_server/templates/email/notify-org-admin-user-affil-approved.txt:9
 #: peeringdb_server/templates/email/notify-org-admin-user-affil-denied.txt:9
 msgid "As the organization's administrator you may view your organization's user list here"
-msgstr ""
+msgstr "Som organisations administrator kan du se hele din organisations brugerliste her"
 
 #: peeringdb_server/templates/email/notify-org-admin-user-affil-denied.txt:3
 #, python-format
 msgid "%(u_full_name)s's affiliation request to %(o_name)s has been DENIED by %(admin_full_name)s."
-msgstr ""
+msgstr "%(u_full_name)s's forespørgsel om tilknytning til %(o_name)s er blevet AFVIST af %(admin_full_name)s."
 
 #: peeringdb_server/templates/email/notify-org-admin-user-affil.txt:3
 #, python-format
 msgid "User %(u_name)s (%(u_email)s) wishes to be affiliated to %(o_name)s."
-msgstr ""
+msgstr "Bruger %(u_name)s (%(u_email)s) ønsker at blive tilknyttet %(o_name)s."
 
 #: peeringdb_server/templates/email/notify-org-admin-user-affil.txt:7
 msgid "As the organization's administrator you may approve or deny this request here"
-msgstr ""
+msgstr "Som organisations administrator kan du godkende eller afvise denne forespørgsel her"
 
 #: peeringdb_server/templates/email/notify-pdb-admin-asnauto-affil.txt:3
 msgid "Ownership of organization was automatically granted to user"
