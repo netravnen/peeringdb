@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-31 22:32+0000\n"
-"PO-Revision-Date: 2018-06-01 14:07+0200\n"
+"PO-Revision-Date: 2018-11-10 18:18+0100\n"
 "Language: da_DK\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: \n"
+"Last-Translator: Christoffer <netravnen@gmail.com>\n"
 "Language-Team: \n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.1.1\n"
 
 #: peeringdb_server/static/peeringdb.js:415
 #: peeringdb_server/static/peeringdb.js:745
@@ -24,7 +24,7 @@ msgstr "Fjern"
 
 #: peeringdb_server/static/peeringdb.js:425
 msgid "Canceled"
-msgstr "Annuller"
+msgstr "Annuleret"
 
 #: peeringdb_server/static/peeringdb.js:449
 msgid "Add user"
@@ -35,14 +35,12 @@ msgid "to Organization?"
 msgstr "til organisation?"
 
 #: peeringdb_server/static/peeringdb.js:466
-#, fuzzy
 msgid "Deny"
 msgstr "Bloker"
 
 #: peeringdb_server/static/peeringdb.js:466
-#, fuzzy
 msgid "request to join the Organization?"
-msgstr "forespørg at blive tilføjet til organisation?"
+msgstr "anmod om medlemskab af organisationen?"
 
 #: peeringdb_server/static/peeringdb.js:615
 msgid "Unknown request type:"
@@ -70,22 +68,18 @@ msgid "Participant"
 msgstr "Deltager"
 
 #: peeringdb_server/static/peeringdb.js:805
-#, fuzzy
 msgid "Facility"
 msgstr "Facility"
 
 #: peeringdb_server/static/peeringdb.js:816
-#, fuzzy
 msgid "Network Contact"
-msgstr "Netværks kontakt"
+msgstr "Kontaktperson"
 
 #: peeringdb_server/static/peeringdb.js:849
-#, fuzzy
 msgid "Network - Exchange link"
 msgstr "Netværk - Exchange link"
 
 #: peeringdb_server/static/peeringdb.js:894
-#, fuzzy
 msgid "Network - Facility link"
 msgstr "Netværk - Facility link"
 
@@ -98,7 +92,6 @@ msgid "IXLAN Prefix"
 msgstr "IXLAN præfiks"
 
 #: peeringdb_server/static/peeringdb.js:959
-#, fuzzy
 msgid "Exchange - Facility link"
 msgstr "Exchange - Facility link"
 
@@ -115,14 +108,12 @@ msgid "Invalid value"
 msgstr "Ugyldig værdi"
 
 #: peeringdb_server/static/twentyc.edit.js:787
-#, fuzzy
 msgid "Input required"
 msgstr "Data påkrævet"
 
 #: peeringdb_server/static/twentyc.edit.js:870
-#, fuzzy
 msgid "Needs to match password"
-msgstr "Kodeord skal matche"
+msgstr "Kodeord skal være ens"
 
 #: peeringdb_server/static/twentyc.edit.js:887
 msgid "Needs to be a valid email address"
