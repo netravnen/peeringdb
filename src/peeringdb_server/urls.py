@@ -268,6 +268,22 @@ urlpatterns = [
     re_path(r"^org_admin/uoar/approve$", peeringdb_server.org_admin_views.uoar_approve),
     re_path(r"^org_admin/uoar/deny$", peeringdb_server.org_admin_views.uoar_deny),
     re_path(
+        r"^org_admin/factransfer/initiate$",
+        peeringdb_server.org_admin_views.facility_transfer_initiate,
+    ),
+    re_path(
+        r"^org_admin/factransfer/approve$",
+        peeringdb_server.org_admin_views.facility_transfer_approve,
+    ),
+    re_path(
+        r"^org_admin/factransfer/reject$",
+        peeringdb_server.org_admin_views.facility_transfer_reject,
+    ),
+    re_path(
+        r"^org_admin/factransfer/cancel$",
+        peeringdb_server.org_admin_views.facility_transfer_cancel,
+    ),
+    re_path(
         r"^org_admin/manage_user/update$",
         peeringdb_server.org_admin_views.manage_user_update,
     ),

@@ -10,6 +10,7 @@ from django.test import Client, RequestFactory, TestCase
 from django.urls import reverse
 from django_otp.plugins.otp_totp.models import TOTPDevice
 from grainy.const import PERM_CREATE
+from reversion.models import Version
 
 import peeringdb_server.models as models
 import peeringdb_server.org_admin_views as org_admin
@@ -960,3 +961,485 @@ class OrgAdminTests(TestCase):
 
         org.refresh_from_db()
         assert org.status == "deleted"
+
+    def _factransfer_post(self, path, org_id, user, **data):
+        """
+        Build a POST request for the facility transfer endpoints, with
+        org_id in the query string as org_admin_required expects.
+        """
+
+        with override_group_id():
+            request = self.factory.post(f"{path}?org_id={org_id}", data=data)
+        mock_csrf_session(request)
+        request.user = user
+        return request
+
+    def test_facility_transfer_initiate(self):
+        """
+        Test that an admin of the facility's org can initiate a transfer
+        org_admin_views.facility_transfer_initiate
+        """
+
+        request = self._factransfer_post(
+            "/org_admin/factransfer/initiate",
+            self.org.id,
+            self.org_admin,
+            fac_id=self.fac.id,
+            target_org_id=self.org_other.id,
+        )
+
+        resp = json.loads(org_admin.facility_transfer_initiate(request).content)
+        self.assertEqual(resp["status"], "ok")
+
+        xfer = models.FacilityOwnershipTransferRequest.objects.get(id=resp["id"])
+        self.assertEqual(xfer.fac, self.fac)
+        self.assertEqual(xfer.source_org, self.org)
+        self.assertEqual(xfer.target_org, self.org_other)
+        self.assertEqual(xfer.requested_by, self.org_admin)
+        self.assertEqual(xfer.status, "pending")
+
+        # facility ownership is unchanged until approved
+        self.fac.refresh_from_db()
+        self.assertEqual(self.fac.org, self.org)
+
+    def test_facility_transfer_initiate_requires_source_admin(self):
+        """
+        Test that a non-admin of the facility's org cannot initiate a transfer
+        """
+
+        # user_a is a member of self.org, not an admin
+        request = self._factransfer_post(
+            "/org_admin/factransfer/initiate",
+            self.org.id,
+            self.user_a,
+            fac_id=self.fac.id,
+            target_org_id=self.org_other.id,
+        )
+
+        resp = org_admin.facility_transfer_initiate(request)
+        self.assertEqual(resp.status_code, 403)
+        self.assertEqual(
+            models.FacilityOwnershipTransferRequest.objects.count(),
+            0,
+        )
+
+    def test_facility_transfer_initiate_rejects_duplicate_pending(self):
+        """
+        Test that only one pending transfer can exist per facility
+        """
+
+        models.FacilityOwnershipTransferRequest.objects.create(
+            fac=self.fac,
+            source_org=self.org,
+            target_org=self.org_other,
+            requested_by=self.org_admin,
+        )
+
+        request = self._factransfer_post(
+            "/org_admin/factransfer/initiate",
+            self.org.id,
+            self.org_admin,
+            fac_id=self.fac.id,
+            target_org_id=self.org_other.id,
+        )
+
+        resp = org_admin.facility_transfer_initiate(request)
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(models.FacilityOwnershipTransferRequest.objects.count(), 1)
+
+    def test_facility_transfer_approve_moves_org(self):
+        """
+        Test that an admin of the target org can approve a transfer, which
+        reassigns the facility
+        org_admin_views.facility_transfer_approve
+        """
+
+        self.org_other.admin_usergroup.user_set.add(self.user_d)
+
+        xfer = models.FacilityOwnershipTransferRequest.objects.create(
+            fac=self.fac,
+            source_org=self.org,
+            target_org=self.org_other,
+            requested_by=self.org_admin,
+        )
+
+        request = self._factransfer_post(
+            "/org_admin/factransfer/approve",
+            self.org_other.id,
+            self.user_d,
+            id=xfer.id,
+        )
+
+        resp = json.loads(org_admin.facility_transfer_approve(request).content)
+        self.assertEqual(resp["status"], "ok")
+        self.assertEqual(resp["fac_id"], self.fac.id)
+
+        xfer.refresh_from_db()
+        self.assertEqual(xfer.status, "approved")
+
+        self.fac.refresh_from_db()
+        self.assertEqual(self.fac.org, self.org_other)
+
+    def test_facility_transfer_approve_requires_target_admin(self):
+        """
+        Test that the initiating (source org) admin cannot approve their own
+        transfer request
+        """
+
+        xfer = models.FacilityOwnershipTransferRequest.objects.create(
+            fac=self.fac,
+            source_org=self.org,
+            target_org=self.org_other,
+            requested_by=self.org_admin,
+        )
+
+        # org_admin administers self.org (source), not self.org_other (target)
+        request = self._factransfer_post(
+            "/org_admin/factransfer/approve",
+            self.org_other.id,
+            self.org_admin,
+            id=xfer.id,
+        )
+
+        resp = org_admin.facility_transfer_approve(request)
+        self.assertEqual(resp.status_code, 403)
+
+        xfer.refresh_from_db()
+        self.assertEqual(xfer.status, "pending")
+
+        self.fac.refresh_from_db()
+        self.assertEqual(self.fac.org, self.org)
+
+    def test_facility_transfer_reject(self):
+        """
+        Test that an admin of the target org can reject a transfer, leaving
+        facility ownership unchanged
+        org_admin_views.facility_transfer_reject
+        """
+
+        self.org_other.admin_usergroup.user_set.add(self.user_d)
+
+        xfer = models.FacilityOwnershipTransferRequest.objects.create(
+            fac=self.fac,
+            source_org=self.org,
+            target_org=self.org_other,
+            requested_by=self.org_admin,
+        )
+
+        request = self._factransfer_post(
+            "/org_admin/factransfer/reject",
+            self.org_other.id,
+            self.user_d,
+            id=xfer.id,
+        )
+
+        resp = json.loads(org_admin.facility_transfer_reject(request).content)
+        self.assertEqual(resp["status"], "ok")
+
+        xfer.refresh_from_db()
+        self.assertEqual(xfer.status, "rejected")
+
+        self.fac.refresh_from_db()
+        self.assertEqual(self.fac.org, self.org)
+
+    def test_facility_transfer_cancel(self):
+        """
+        Test that an admin of the source org can cancel its own pending
+        transfer, leaving facility ownership unchanged
+        org_admin_views.facility_transfer_cancel
+        """
+
+        xfer = models.FacilityOwnershipTransferRequest.objects.create(
+            fac=self.fac,
+            source_org=self.org,
+            target_org=self.org_other,
+            requested_by=self.org_admin,
+        )
+
+        # org_id is the SOURCE org here, unlike approve/reject
+        request = self._factransfer_post(
+            "/org_admin/factransfer/cancel",
+            self.org.id,
+            self.org_admin,
+            id=xfer.id,
+        )
+
+        resp = json.loads(org_admin.facility_transfer_cancel(request).content)
+        self.assertEqual(resp["status"], "ok")
+
+        xfer.refresh_from_db()
+        self.assertEqual(xfer.status, "cancelled")
+
+        self.fac.refresh_from_db()
+        self.assertEqual(self.fac.org, self.org)
+
+    def test_facility_transfer_cancel_requires_source_admin(self):
+        """
+        Test that an admin of the TARGET org cannot cancel a transfer on the
+        source org's behalf.
+
+        Cancel is authorized against the source side; approve/reject against
+        the target side. Reusing the approve/reject check for cancel would
+        let the receiving party withdraw the sender's request.
+        """
+
+        self.org_other.admin_usergroup.user_set.add(self.user_d)
+
+        xfer = models.FacilityOwnershipTransferRequest.objects.create(
+            fac=self.fac,
+            source_org=self.org,
+            target_org=self.org_other,
+            requested_by=self.org_admin,
+        )
+
+        request = self._factransfer_post(
+            "/org_admin/factransfer/cancel",
+            self.org_other.id,
+            self.user_d,
+            id=xfer.id,
+        )
+
+        resp = org_admin.facility_transfer_cancel(request)
+        self.assertEqual(resp.status_code, 403)
+
+        xfer.refresh_from_db()
+        self.assertEqual(xfer.status, "pending")
+
+    def test_facility_transfer_cancel_rejects_non_pending(self):
+        """
+        Test that an already-resolved transfer cannot be cancelled
+        """
+
+        self.org_other.admin_usergroup.user_set.add(self.user_d)
+
+        xfer = models.FacilityOwnershipTransferRequest.objects.create(
+            fac=self.fac,
+            source_org=self.org,
+            target_org=self.org_other,
+            requested_by=self.org_admin,
+        )
+        xfer.approve(self.user_d)
+
+        request = self._factransfer_post(
+            "/org_admin/factransfer/cancel",
+            self.org.id,
+            self.org_admin,
+            id=xfer.id,
+        )
+
+        resp = org_admin.facility_transfer_cancel(request)
+        self.assertEqual(resp.status_code, 400)
+
+        xfer.refresh_from_db()
+        self.assertEqual(xfer.status, "approved")
+
+    def test_facility_transfer_initiate_records_reason(self):
+        """
+        Test that the initiating admin's stated reason is persisted and
+        carried into the audit trail
+        """
+
+        reason = "Acquisition of DC assets, contract ref 12345"
+
+        request = self._factransfer_post(
+            "/org_admin/factransfer/initiate",
+            self.org.id,
+            self.org_admin,
+            fac_id=self.fac.id,
+            target_org_id=self.org_other.id,
+            reason=reason,
+        )
+
+        resp = json.loads(org_admin.facility_transfer_initiate(request).content)
+        xfer = models.FacilityOwnershipTransferRequest.objects.get(id=resp["id"])
+        self.assertEqual(xfer.reason, reason)
+
+        version = self._transfer_versions(xfer).first()
+        self.assertIn(reason, version.revision.comment)
+
+    def test_facility_transfer_initiate_reason_optional(self):
+        """
+        Test that omitting the reason is accepted and leaves no dangling
+        separator in the revision comment
+        """
+
+        request = self._factransfer_post(
+            "/org_admin/factransfer/initiate",
+            self.org.id,
+            self.org_admin,
+            fac_id=self.fac.id,
+            target_org_id=self.org_other.id,
+        )
+
+        resp = json.loads(org_admin.facility_transfer_initiate(request).content)
+        xfer = models.FacilityOwnershipTransferRequest.objects.get(id=resp["id"])
+        self.assertEqual(xfer.reason, "")
+
+        version = self._transfer_versions(xfer).first()
+        self.assertTrue(version.revision.comment.endswith("requested"))
+
+    def test_facility_transfer_initiate_rejects_overlong_reason(self):
+        """
+        Test that an over-length reason is rejected rather than silently
+        truncated.
+
+        objects.create() does not enforce max_length, and backends differ on
+        what they do with an oversized value, so this must be caught in the
+        view.
+        """
+
+        max_reason = models.FacilityOwnershipTransferRequest._meta.get_field(
+            "reason"
+        ).max_length
+
+        request = self._factransfer_post(
+            "/org_admin/factransfer/initiate",
+            self.org.id,
+            self.org_admin,
+            fac_id=self.fac.id,
+            target_org_id=self.org_other.id,
+            reason="x" * (max_reason + 1),
+        )
+
+        resp = org_admin.facility_transfer_initiate(request)
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn("reason", json.loads(resp.content))
+
+        self.assertEqual(
+            models.FacilityOwnershipTransferRequest.objects.count(),
+            0,
+        )
+
+    def _transfer_versions(self, xfer):
+        """
+        Reversion Versions recorded against a transfer request, newest first.
+        """
+
+        return Version.objects.get_for_object(xfer).order_by("-revision__date_created")
+
+    def test_facility_transfer_audit_trail_records_acting_user(self):
+        """
+        Every state change must leave a revision naming the user that acted.
+
+        The acting user is asserted on revision.user (a real FK) rather than
+        in the comment text, so it stays resolvable to the user record.
+        """
+
+        self.org_other.admin_usergroup.user_set.add(self.user_d)
+
+        # initiate (source side)
+        request = self._factransfer_post(
+            "/org_admin/factransfer/initiate",
+            self.org.id,
+            self.org_admin,
+            fac_id=self.fac.id,
+            target_org_id=self.org_other.id,
+        )
+        resp = json.loads(org_admin.facility_transfer_initiate(request).content)
+        xfer = models.FacilityOwnershipTransferRequest.objects.get(id=resp["id"])
+
+        versions = self._transfer_versions(xfer)
+        self.assertEqual(versions.count(), 1)
+        self.assertEqual(versions.first().revision.user_id, self.org_admin.id)
+
+        # approve (target side) — a second, distinct actor
+        request = self._factransfer_post(
+            "/org_admin/factransfer/approve",
+            self.org_other.id,
+            self.user_d,
+            id=xfer.id,
+        )
+        self.assertEqual(
+            json.loads(org_admin.facility_transfer_approve(request).content)["status"],
+            "ok",
+        )
+
+        versions = self._transfer_versions(xfer)
+        self.assertEqual(versions.count(), 2)
+        self.assertEqual(versions.first().revision.user_id, self.user_d.id)
+        self.assertEqual(versions.first().field_dict.get("status"), "approved")
+
+    def test_facility_transfer_audit_trail_reject_and_cancel(self):
+        """
+        Reject and cancel must also record a revision with the acting user.
+
+        These two recorded nothing at all before the request model was
+        registered with reversion, so they are the regression guard.
+        """
+
+        self.org_other.admin_usergroup.user_set.add(self.user_d)
+
+        for action, actor, org_id, expected in [
+            ("reject", self.user_d, self.org_other.id, "rejected"),
+            ("cancel", self.org_admin, self.org.id, "cancelled"),
+        ]:
+            xfer = models.FacilityOwnershipTransferRequest.objects.create(
+                fac=self.fac,
+                source_org=self.org,
+                target_org=self.org_other,
+                requested_by=self.org_admin,
+            )
+
+            request = self._factransfer_post(
+                f"/org_admin/factransfer/{action}", org_id, actor, id=xfer.id
+            )
+            view = getattr(org_admin, f"facility_transfer_{action}")
+            self.assertEqual(
+                json.loads(view(request).content)["status"], "ok", f"{action} failed"
+            )
+
+            versions = self._transfer_versions(xfer)
+            self.assertEqual(versions.count(), 1, f"{action} recorded no revision")
+            self.assertEqual(
+                versions.first().revision.user_id, actor.id, f"{action} lost actor"
+            )
+            self.assertEqual(versions.first().field_dict.get("status"), expected)
+
+    def test_facility_transfer_reinitiate_after_cancel(self):
+        """
+        Test the scenario this feature exists for: a transfer raised against
+        the wrong destination org is cancelled and re-initiated against the
+        correct one.
+        """
+
+        org_correct = models.Organization.objects.create(
+            name="Test org correct", status="ok"
+        )
+
+        # initiate against the wrong target org
+        wrong = models.FacilityOwnershipTransferRequest.objects.create(
+            fac=self.fac,
+            source_org=self.org,
+            target_org=self.org_other,
+            requested_by=self.org_admin,
+        )
+
+        request = self._factransfer_post(
+            "/org_admin/factransfer/cancel",
+            self.org.id,
+            self.org_admin,
+            id=wrong.id,
+        )
+        self.assertEqual(
+            json.loads(org_admin.facility_transfer_cancel(request).content)["status"],
+            "ok",
+        )
+
+        # a cancelled request must not block a corrected one
+        request = self._factransfer_post(
+            "/org_admin/factransfer/initiate",
+            self.org.id,
+            self.org_admin,
+            fac_id=self.fac.id,
+            target_org_id=org_correct.id,
+        )
+
+        resp = json.loads(org_admin.facility_transfer_initiate(request).content)
+        self.assertEqual(resp["status"], "ok")
+
+        corrected = models.FacilityOwnershipTransferRequest.objects.get(id=resp["id"])
+        self.assertEqual(corrected.target_org, org_correct)
+        self.assertEqual(corrected.status, "pending")
+
+        wrong.refresh_from_db()
+        self.assertEqual(wrong.status, "cancelled")

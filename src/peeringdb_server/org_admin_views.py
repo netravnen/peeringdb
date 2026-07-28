@@ -4,6 +4,7 @@ View for organization administrative actions (/org endpoint).
 
 from urllib.parse import urljoin
 
+import reversion
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
@@ -19,6 +20,7 @@ from grainy.const import PERM_READ
 from peeringdb_server.models import (
     Carrier,
     Facility,
+    FacilityOwnershipTransferRequest,
     InternetExchange,
     Network,
     Organization,
@@ -677,3 +679,191 @@ def uoar_deny(request, **kwargs):
         return JsonResponse({"status": "ok"})
 
     return JsonResponse({"status": "ok"})
+
+
+@login_required
+@csrf_protect
+@transaction.atomic
+@org_admin_required
+def facility_transfer_initiate(request, **kwargs):
+    """
+    Initiate a transfer of a facility to another organization.
+
+    org_id identifies the facility's current organization; the requesting
+    user must be an admin of it.
+    """
+
+    org = kwargs.get("org")
+
+    try:
+        fac = Facility.objects.get(id=request.POST.get("fac_id"))
+    except (Facility.DoesNotExist, ValueError):
+        return JsonResponse(
+            {"non_field_errors": [_("Invalid facility specified")]}, status=400
+        )
+
+    if fac.org != org:
+        return JsonResponse({}, status=403)
+
+    try:
+        target_org = Organization.objects.get(id=request.POST.get("target_org_id"))
+    except (Organization.DoesNotExist, ValueError):
+        return JsonResponse(
+            {"non_field_errors": [_("Invalid organization specified")]}, status=400
+        )
+
+    if target_org == org:
+        return JsonResponse(
+            {"non_field_errors": [_("Facility already belongs to this organization")]},
+            status=400,
+        )
+
+    if FacilityOwnershipTransferRequest.objects.filter(
+        fac=fac, status="pending"
+    ).exists():
+        return JsonResponse(
+            {
+                "non_field_errors": [
+                    _("A transfer request is already pending for this facility")
+                ]
+            },
+            status=400,
+        )
+
+    # objects.create() does not enforce max_length (Django only validates on
+    # full_clean, and backends disagree: MySQL strict mode errors, SQLite
+    # truncates silently), so check here rather than quietly discarding part
+    # of the explanation
+    reason = (request.POST.get("reason") or "").strip()
+    max_reason = FacilityOwnershipTransferRequest._meta.get_field("reason").max_length
+
+    if len(reason) > max_reason:
+        return JsonResponse(
+            {
+                "reason": [
+                    _("Ensure this value has at most %(limit)d characters")
+                    % {"limit": max_reason}
+                ]
+            },
+            status=400,
+        )
+
+    with reversion.create_revision():
+        reversion.set_user(request.user)
+        reversion.set_comment(
+            f"Facility transfer of {fac} from {org} to {target_org} requested"
+            + (f": {reason}" if reason else "")
+        )
+        xfer = FacilityOwnershipTransferRequest.objects.create(
+            fac=fac,
+            source_org=org,
+            target_org=target_org,
+            requested_by=request.user,
+            reason=reason,
+        )
+
+    return JsonResponse({"status": "ok", "id": xfer.id})
+
+
+def get_pending_transfer(request, org, side="target"):
+    """
+    Look up the pending transfer request named by request.POST["id"] and
+    authorize `org` to act on it.
+
+    `side` selects which end of the transfer is allowed to act:
+    "target" for approve/reject (the acquiring org decides), "source" for
+    cancel (the divesting org withdraws its own request). Authorizing cancel
+    against the target side would let the receiving party withdraw a request
+    on the sender's behalf.
+
+    Returns (xfer, None) on success, or (None, error_response).
+    """
+
+    try:
+        xfer = FacilityOwnershipTransferRequest.objects.get(id=request.POST.get("id"))
+    except (FacilityOwnershipTransferRequest.DoesNotExist, ValueError):
+        return None, JsonResponse(
+            {"non_field_errors": [_("Invalid transfer request specified")]}, status=400
+        )
+
+    # source_org is used rather than fac.org because fac.org changes once the
+    # transfer is approved, which would otherwise re-point authorization at
+    # the new owner
+    authorized_org = xfer.target_org if side == "target" else xfer.source_org
+
+    if authorized_org != org:
+        return None, JsonResponse({}, status=403)
+
+    if xfer.status != "pending":
+        return None, JsonResponse(
+            {"non_field_errors": [_("Transfer request is no longer pending")]},
+            status=400,
+        )
+
+    return xfer, None
+
+
+@login_required
+@csrf_protect
+@transaction.atomic
+@org_admin_required
+def facility_transfer_approve(request, **kwargs):
+    """
+    Approve a pending facility transfer, moving the facility to the
+    approving organization.
+
+    org_id identifies the target organization; the requesting user must be
+    an admin of it.
+    """
+
+    xfer, error = get_pending_transfer(request, kwargs.get("org"))
+    if error:
+        return error
+
+    xfer.approve(request.user)
+
+    return JsonResponse({"status": "ok", "fac_id": xfer.fac_id})
+
+
+@login_required
+@csrf_protect
+@transaction.atomic
+@org_admin_required
+def facility_transfer_reject(request, **kwargs):
+    """
+    Reject a pending facility transfer, leaving ownership unchanged.
+
+    org_id identifies the target organization; the requesting user must be
+    an admin of it.
+    """
+
+    xfer, error = get_pending_transfer(request, kwargs.get("org"))
+    if error:
+        return error
+
+    xfer.reject(request.user)
+
+    return JsonResponse({"status": "ok", "fac_id": xfer.fac_id})
+
+
+@login_required
+@csrf_protect
+@transaction.atomic
+@org_admin_required
+def facility_transfer_cancel(request, **kwargs):
+    """
+    Cancel a pending facility transfer that this organization initiated,
+    leaving ownership unchanged.
+
+    org_id identifies the SOURCE organization (the facility's current owner);
+    the requesting user must be an admin of it. Note this is the opposite
+    side to approve/reject.
+    """
+
+    xfer, error = get_pending_transfer(request, kwargs.get("org"), side="source")
+    if error:
+        return error
+
+    xfer.cancel(request.user)
+
+    return JsonResponse({"status": "ok", "fac_id": xfer.fac_id})
