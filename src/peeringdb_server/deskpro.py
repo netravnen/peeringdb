@@ -636,6 +636,79 @@ def ticket_queue_deletion_prevented(request, instance):
         )
 
 
+def ticket_queue_facility_transfer(xfer, user):
+    """
+    Queue a deskpro ticket recording that a facility ownership transfer was
+    initiated (#fac-transfer).
+
+    This is informational: the transfer is self-service between the two org
+    admins and needs no AC action. The ticket exists so support has a
+    reference if either party later needs to be contacted about why the
+    transfer was initiated.
+
+    Deliberately internal-only - no cc_set. At initiation the destination org
+    has not consented to (or necessarily seen) the transfer, and a request
+    raised against the wrong org is expected to be cancelled rather than
+    mailed out.
+    """
+
+    if not getattr(settings, "FAC_TRANSFER_TICKETS", True):
+        return
+
+    subject = (
+        f"[FAC-TRANSFER] fac-{xfer.fac_id} {xfer.fac}: "
+        f"{xfer.source_org} -> {xfer.target_org}"
+    )
+
+    # a transfer raised against the wrong org is cancelled and re-initiated,
+    # so guard against filing several tickets for one real-world event
+    period = settings.PROTECTED_OBJECT_NOTIFICATION_PERIOD
+    now = datetime.datetime.now(datetime.timezone.utc)
+    max_age = now - datetime.timedelta(hours=period)
+
+    if DeskProTicket.objects.filter(
+        subject=f"{settings.EMAIL_SUBJECT_PREFIX}{subject}", created__gt=max_age
+    ).exists():
+        return
+
+    # FIXME: nested helper - no other function in this module nests a def,
+    # so this is a deliberate deviation from the surrounding style. Chosen
+    # over the two alternatives: inlining would repeat
+    # `settings.BASE_URL + django.urls.reverse(...)` five times, and a
+    # module-level helper would add a name to this module's surface for the
+    # benefit of a single caller. Promote it to module level if a second
+    # ticket_queue_* function needs the same thing.
+    def admin_url(model, pk):
+        return settings.BASE_URL + django.urls.reverse(
+            f"admin:peeringdb_server_{model}_change", args=(pk,)
+        )
+
+    ticket = ticket_queue(
+        subject,
+        loader.get_template("email/notify-pdb-admin-fac-transfer.txt").render(
+            {
+                "xfer": xfer,
+                "user": user,
+                "fac_url": admin_url("facility", xfer.fac_id),
+                "source_org_url": admin_url("organization", xfer.source_org_id),
+                "target_org_url": admin_url("organization", xfer.target_org_id),
+                "user_url": admin_url("user", user.id),
+            }
+        ),
+        user,
+    )
+
+    # backlink to this ticket's own record in PeeringDB, which is where the
+    # entity links above are navigable from. Appended after creation because
+    # the ticket id does not exist until the row is written.
+    ticket.body += "\n\nTicket record: " + '<a href="{0}">{0}</a>'.format(
+        admin_url("deskproticket", ticket.id)
+    )
+    ticket.save()
+
+    return ticket
+
+
 def close_deskpro_ticket_for_vq_item(vq_item):
     """
     Flag the DeskPro ticket linked to a VerificationQueueItem for auto-close

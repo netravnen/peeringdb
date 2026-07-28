@@ -6,7 +6,7 @@ import pytest
 from django.conf import settings
 from django.contrib.auth.models import Group
 from django.db import connection
-from django.test import Client, RequestFactory, TestCase
+from django.test import Client, RequestFactory, TestCase, override_settings
 from django.urls import reverse
 from django_otp.plugins.otp_totp.models import TOTPDevice
 from grainy.const import PERM_CREATE
@@ -1309,6 +1309,88 @@ class OrgAdminTests(TestCase):
             models.FacilityOwnershipTransferRequest.objects.count(),
             0,
         )
+
+    def _initiate_for_ticket(self):
+        request = self._factransfer_post(
+            "/org_admin/factransfer/initiate",
+            self.org.id,
+            self.org_admin,
+            fac_id=self.fac.id,
+            target_org_id=self.org_other.id,
+            reason="Acquisition, contract 12345",
+        )
+        return org_admin.facility_transfer_initiate(request)
+
+    @override_settings(FAC_TRANSFER_TICKETS=True)
+    def test_facility_transfer_files_deskpro_ticket(self):
+        """
+        Test that initiating a transfer files an informational DeskPRO
+        ticket carrying the transfer detail and stated reason
+        """
+
+        self.assertEqual(self._initiate_for_ticket().status_code, 200)
+
+        ticket = models.DeskProTicket.objects.get()
+        self.assertIn("[FAC-TRANSFER]", ticket.subject)
+        self.assertIn(f"fac-{self.fac.id}", ticket.subject)
+        self.assertIn(str(self.org), ticket.subject)
+        self.assertIn(str(self.org_other), ticket.subject)
+
+        self.assertIn("Acquisition, contract 12345", ticket.body)
+        self.assertIn(self.org_admin.username, ticket.body)
+
+        # queued for the async publisher, not published inline
+        self.assertIsNone(ticket.published)
+
+        # internal to AC only - must not notify the destination org
+        self.assertEqual(ticket.cc_set.count(), 0)
+
+        # backlink points at this ticket's own record, and the body carries
+        # navigable links to the entities involved
+        self.assertIn(
+            f"/cp/peeringdb_server/deskproticket/{ticket.id}/change/", ticket.body
+        )
+        self.assertIn(
+            f"/cp/peeringdb_server/facility/{self.fac.id}/change/", ticket.body
+        )
+        self.assertIn(
+            f"/cp/peeringdb_server/organization/{self.org.id}/change/", ticket.body
+        )
+        self.assertIn(
+            f"/cp/peeringdb_server/organization/{self.org_other.id}/change/",
+            ticket.body,
+        )
+        self.assertIn(
+            f"/cp/peeringdb_server/user/{self.org_admin.id}/change/", ticket.body
+        )
+
+        # the facility itself must not be the backlink target any more
+        self.assertNotIn("Ticket record: </a>", ticket.body)
+
+    @override_settings(FAC_TRANSFER_TICKETS=False)
+    def test_facility_transfer_ticket_can_be_disabled(self):
+        """
+        Test that ticket creation is gated by FAC_TRANSFER_TICKETS
+        """
+
+        self.assertEqual(self._initiate_for_ticket().status_code, 200)
+        self.assertEqual(models.DeskProTicket.objects.count(), 0)
+
+    @override_settings(FAC_TRANSFER_TICKETS=True)
+    def test_facility_transfer_ticket_spam_guarded(self):
+        """
+        Test that cancelling and re-initiating the same transfer does not
+        file a second ticket for what is one real-world event
+        """
+
+        resp = json.loads(self._initiate_for_ticket().content)
+        self.assertEqual(models.DeskProTicket.objects.count(), 1)
+
+        xfer = models.FacilityOwnershipTransferRequest.objects.get(id=resp["id"])
+        xfer.cancel(self.org_admin)
+
+        self.assertEqual(self._initiate_for_ticket().status_code, 200)
+        self.assertEqual(models.DeskProTicket.objects.count(), 1)
 
     def _transfer_versions(self, xfer):
         """

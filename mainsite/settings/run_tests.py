@@ -59,6 +59,9 @@ RATELIMITS = {
 
 GUEST_GROUP_ID = 1
 USER_GROUP_ID = 2
+# off by default in tests so transfer tests don't accumulate ticket rows;
+# the ticket tests enable it explicitly via override_settings
+FAC_TRANSFER_TICKETS = False
 ELASTICSEARCH_DSL_AUTOSYNC = False
 ELASTICSEARCH_DSL_AUTO_REFRESH = False
 IXF_REMOVE_STALE_NETIXLAN = True

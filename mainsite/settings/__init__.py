@@ -1498,6 +1498,12 @@ set_option("DATA_CHANGE_SEND_EMAILS", False)
 # from users repeat-clicking the delete button
 set_option("PROTECTED_OBJECT_NOTIFICATION_PERIOD", 1)
 
+# whether initiating a facility ownership transfer files an informational
+# DeskPRO ticket. The transfer itself is self-service between the two org
+# admins - the ticket exists only so support has a reference if either party
+# needs to be contacted about it.
+set_option("FAC_TRANSFER_TICKETS", True)
+
 set_option("MAINTENANCE_MODE_LOCKFILE", "maintenance.lock")
 
 # django_peeringdb settings

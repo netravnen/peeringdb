@@ -1,0 +1,20 @@
+A facility ownership transfer was initiated in PeeringDB.
+
+Facility: <a href="{{ fac_url }}">fac-{{ xfer.fac.id }}: {{ xfer.fac }}</a>
+From: <a href="{{ source_org_url }}">org-{{ xfer.source_org.id }}: {{ xfer.source_org }}</a>
+To: <a href="{{ target_org_url }}">org-{{ xfer.target_org.id }}: {{ xfer.target_org }}</a>
+Initiated by: <a href="{{ user_url }}">user-{{ user.id }}: {{ user.username }}</a>
+
+Stated reason:
+
+{% if xfer.reason %}{{ xfer.reason }}{% else %}(none given){% endif %}
+
+This ticket is informational. The transfer is self-service and needs no
+Admin Committee action: it completes only when an admin of the destination
+organization approves it, and the source organization can cancel it while it
+is still pending. It is recorded here so there is a support-side reference if
+either party needs to be contacted about why the transfer was initiated.
+
+The Admin Committee can cancel a still-pending transfer to block it, but
+cannot approve one - approval is the destination organization's decision
+alone.

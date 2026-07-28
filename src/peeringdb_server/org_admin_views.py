@@ -17,6 +17,7 @@ from django_grainy.models import UserPermission
 from django_handleref.models import HandleRefModel
 from grainy.const import PERM_READ
 
+from peeringdb_server import deskpro
 from peeringdb_server.models import (
     Carrier,
     Facility,
@@ -761,6 +762,12 @@ def facility_transfer_initiate(request, **kwargs):
             requested_by=request.user,
             reason=reason,
         )
+
+    # informational only, and initiate-only: approve/reject/cancel are
+    # self-service outcomes already captured in the revision log.
+    # resolved on the module rather than bound at import, matching
+    # pdb_deskpro_publish, so tests can patch it regardless of import order
+    deskpro.ticket_queue_facility_transfer(xfer, request.user)
 
     return JsonResponse({"status": "ok", "id": xfer.id})
 
