@@ -934,6 +934,141 @@ class UserOrgAffiliationRequestHistory(Version, StripFieldMixin):
         verbose_name_plural = _("User to Organization Affiliation Request History")
 
 
+@reversion.register()
+class FacilityOwnershipTransferRequest(StripFieldMixin):
+    """
+    Tracks a request to transfer a facility from one organization to another.
+
+    An admin of the facility's current organization initiates the request; an
+    admin of the target organization must approve it before ownership moves.
+    """
+
+    fac = models.ForeignKey(
+        "peeringdb_server.Facility",
+        on_delete=models.CASCADE,
+        related_name="transfer_requests",
+        help_text=_("The facility to be transferred"),
+    )
+
+    source_org = models.ForeignKey(
+        "peeringdb_server.Organization",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text=_(
+            "The organization the facility is transferred from. Recorded explicitly rather than read from fac.org, which changes when the transfer is approved."
+        ),
+    )
+
+    target_org = models.ForeignKey(
+        "peeringdb_server.Organization",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text=_("The organization the facility is to be transferred to"),
+    )
+
+    requested_by = models.ForeignKey(
+        "peeringdb_server.User",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text=_("The user that initiated the transfer"),
+    )
+
+    reason = models.CharField(
+        max_length=255,
+        blank=True,
+        default="",
+        help_text=_(
+            "Why this transfer was initiated, in the initiating admin's own words"
+        ),
+    )
+
+    created = CreatedDateTimeField()
+
+    status = models.CharField(
+        max_length=32,
+        choices=[
+            ("pending", _("Pending")),
+            ("approved", _("Approved")),
+            ("rejected", _("Rejected")),
+            ("cancelled", _("Cancelled")),
+        ],
+        default="pending",
+        help_text=_("Status of this request"),
+    )
+
+    class Meta:
+        db_table = "peeringdb_facility_ownership_transfer_request"
+        verbose_name = _("Facility Ownership Transfer Request")
+        verbose_name_plural = _("Facility Ownership Transfer Requests")
+
+    def _set_status(self, status, verb, user):
+        """
+        Move the request to a terminal status, recording the acting user on
+        the revision. Callers are responsible for wrapping this in
+        reversion.create_revision().
+
+        The user is set on the revision itself (a real FK) rather than
+        interpolated into the comment, so it stays queryable and resolvable
+        to the user record. `user` is passed in explicitly rather than read
+        from the request context so this also records correctly outside an
+        HTTP request.
+        """
+
+        reversion.set_user(user)
+        reversion.set_comment(
+            f"Facility transfer of {self.fac} from {self.source_org} to {self.target_org} {verb}"
+        )
+
+        self.status = status
+        self.save()
+
+    @reversion.create_revision()
+    def approve(self, user):
+        """
+        Approve the transfer and reassign the facility to the target org.
+        """
+
+        self.fac.org = self.target_org
+        self.fac.save()
+
+        self._set_status("approved", "approved", user)
+
+    @reversion.create_revision()
+    def reject(self, user):
+        """
+        Reject the transfer, leaving facility ownership unchanged.
+
+        Rejection is the destination organization declining the transfer.
+        """
+
+        self._set_status("rejected", "rejected", user)
+
+    @reversion.create_revision()
+    def cancel(self, user):
+        """
+        Cancel the transfer, leaving facility ownership unchanged.
+
+        Cancellation is the source organization withdrawing its own request
+        (for example when it was raised against the wrong destination org).
+        Kept distinct from "rejected" so the audit trail records which party
+        ended the request.
+        """
+
+        self._set_status("cancelled", "cancelled", user)
+
+
+class FacilityOwnershipTransferRequestHistory(Version, StripFieldMixin):
+    """
+    Proxy model for reversion Version to track changes in
+    FacilityOwnershipTransferRequest objects in django-admin
+    """
+
+    class Meta:
+        proxy = True
+        verbose_name = _("Facility Ownership Transfer Request History")
+        verbose_name_plural = _("Facility Ownership Transfer Request History")
+
+
 class VerificationQueueItem(StripFieldMixin):
     """
     Keeps track of new items created that need to be reviewed and approved
