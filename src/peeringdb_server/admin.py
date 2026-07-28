@@ -78,6 +78,8 @@ from peeringdb_server.models import (
     DeskProTicketCC,
     EnvironmentSetting,
     Facility,
+    FacilityOwnershipTransferRequest,
+    FacilityOwnershipTransferRequestHistory,
     GeoCoordinateCache,
     InternetExchange,
     InternetExchangeFacility,
@@ -2987,6 +2989,156 @@ class UserOrgAffiliationRequestHistoryAdmin(admin.ModelAdmin):
 
     def asn(self, obj):
         return obj.field_dict.get("asn")
+
+    # this view is completely read only
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(FacilityOwnershipTransferRequest)
+class FacilityOwnershipTransferRequestAdmin(admin.ModelAdmin):
+    """
+    Staff view of facility ownership transfers.
+
+    Deliberately asymmetric: staff may CANCEL a pending transfer (blocking it,
+    or assisting a source org that cannot reach the UI), but may NOT approve
+    one. Approval transfers ownership and is the destination organization's
+    decision alone - letting staff approve would authorize receipt of a
+    facility on the destination admins' behalf, defeating the two-sided
+    consent this feature exists to enforce.
+
+    Cancelling is safe by comparison: it only returns things to the state
+    before the request, and the source org can simply re-initiate.
+
+    Every field is read-only. This is load-bearing, not cosmetic - an
+    editable `status` would let a superuser type "approved" and bypass the
+    restriction above entirely.
+    """
+
+    list_display = (
+        "id",
+        "fac",
+        "source_org",
+        "target_org",
+        "status",
+        "reason",
+        "requested_by",
+        "created",
+    )
+    list_filter = ("status",)
+    search_fields = ("fac__name", "source_org__name", "target_org__name", "reason")
+    readonly_fields = (
+        "fac",
+        "source_org",
+        "target_org",
+        "requested_by",
+        "reason",
+        "status",
+        "created",
+    )
+    actions = ["cancel_transfers"]
+
+    # no approve/reject action exists here by design - see class docstring
+
+    @transaction.atomic
+    def cancel_transfers(self, request, queryset):
+        cancelled = 0
+        for each in queryset:
+            if each.status != "pending":
+                messages.error(
+                    request,
+                    _("Cannot cancel a transfer that is no longer pending: %(pk)s")
+                    % {"pk": each.id},
+                )
+                continue
+            each.cancel(request.user)
+            cancelled += 1
+
+        if cancelled:
+            messages.success(
+                request,
+                _("Cancelled %(count)d pending transfer(s)") % {"count": cancelled},
+            )
+
+    cancel_transfers.short_description = _("Cancel selected pending transfers")
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(FacilityOwnershipTransferRequestHistory)
+class FacilityOwnershipTransferRequestHistoryAdmin(admin.ModelAdmin):
+    list_display = (
+        "user",
+        "status",
+        "fac",
+        "source_org",
+        "target_org",
+        "reason",
+        "comment",
+        "date_created",
+    )
+    readonly_fields = list_display
+    list_filter = ("content_type",)
+    search_fields = ("revision__user__username", "revision__comment", "serialized_data")
+
+    def get_queryset(self, request):
+        return (
+            super()
+            .get_queryset(request)
+            .filter(
+                content_type=ContentType.objects.get_for_model(
+                    FacilityOwnershipTransferRequest
+                )
+            )
+        )
+
+    def user(self, obj):
+        """
+        The user that performed this action, rendered as a link to their
+        user record. Read off the revision rather than the serialized
+        object, so it reflects who acted rather than who was requested.
+        """
+        user_id = obj.revision.user_id
+        if not user_id:
+            return "-"
+        return mark_safe(
+            '<a href="{}">{}</a>'.format(
+                django.urls.reverse(
+                    "admin:peeringdb_server_user_change", args=(user_id,)
+                ),
+                user_id,
+            )
+        )
+
+    user.short_description = _("Action taken by")
+
+    def date_created(self, obj):
+        return obj.revision.date_created
+
+    def comment(self, obj):
+        return obj.revision.comment
+
+    def status(self, obj):
+        return obj.field_dict.get("status")
+
+    def fac(self, obj):
+        return obj.field_dict.get("fac_id")
+
+    def source_org(self, obj):
+        return obj.field_dict.get("source_org_id")
+
+    def target_org(self, obj):
+        return obj.field_dict.get("target_org_id")
+
+    def reason(self, obj):
+        return obj.field_dict.get("reason")
 
     # this view is completely read only
     def has_add_permission(self, request):

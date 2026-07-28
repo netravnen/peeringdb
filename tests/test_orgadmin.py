@@ -4,7 +4,9 @@ from unittest.mock import patch
 
 import pytest
 from django.conf import settings
+from django.contrib.admin.sites import AdminSite
 from django.contrib.auth.models import Group
+from django.contrib.messages.storage.fallback import FallbackStorage
 from django.db import connection
 from django.test import Client, RequestFactory, TestCase, override_settings
 from django.urls import reverse
@@ -12,6 +14,9 @@ from django_otp.plugins.otp_totp.models import TOTPDevice
 from grainy.const import PERM_CREATE
 from reversion.models import Version
 
+# aliased rather than bound as `admin` (the convention in tests/test_admin.py)
+# because this module already uses `admin` as a local variable name
+import peeringdb_server.admin as pdb_admin
 import peeringdb_server.models as models
 import peeringdb_server.org_admin_views as org_admin
 import peeringdb_server.views as views
@@ -1391,6 +1396,73 @@ class OrgAdminTests(TestCase):
 
         self.assertEqual(self._initiate_for_ticket().status_code, 200)
         self.assertEqual(models.DeskProTicket.objects.count(), 1)
+
+    def test_admin_can_cancel_pending_transfer(self):
+        """
+        Test that staff can cancel a pending transfer from django-admin,
+        to block it or to assist a source org
+        """
+
+        xfer = models.FacilityOwnershipTransferRequest.objects.create(
+            fac=self.fac,
+            source_org=self.org,
+            target_org=self.org_other,
+            requested_by=self.org_admin,
+        )
+
+        staff = models.User.objects.create_user("acmember", "ac@localhost", "acmember")
+        request = self.factory.post("/cp/")
+        request.user = staff
+        mock_csrf_session(request)
+        request._messages = FallbackStorage(request)
+
+        model_admin = pdb_admin.FacilityOwnershipTransferRequestAdmin(
+            models.FacilityOwnershipTransferRequest, AdminSite()
+        )
+        model_admin.cancel_transfers(
+            request,
+            models.FacilityOwnershipTransferRequest.objects.filter(id=xfer.id),
+        )
+
+        xfer.refresh_from_db()
+        self.assertEqual(xfer.status, "cancelled")
+
+        # ownership unchanged - cancelling only restores the prior state
+        self.fac.refresh_from_db()
+        self.assertEqual(self.fac.org, self.org)
+
+        # and the acting staff user is on the revision
+        self.assertEqual(
+            self._transfer_versions(xfer).first().revision.user_id, staff.id
+        )
+
+    def test_admin_cannot_approve_transfer(self):
+        """
+        Test that staff have no route to approving a transfer.
+
+        Approval transfers ownership and is the destination org's decision;
+        allowing staff to approve would authorize receipt of a facility on
+        the destination admins' behalf. Guarded two ways: no approve action
+        is registered, and every field (notably status) is read-only, so it
+        cannot be set to "approved" through the change form either.
+        """
+
+        model_admin = pdb_admin.FacilityOwnershipTransferRequestAdmin(
+            models.FacilityOwnershipTransferRequest, AdminSite()
+        )
+
+        self.assertEqual(list(model_admin.actions), ["cancel_transfers"])
+        self.assertFalse(
+            [a for a in model_admin.actions if "approve" in a or "reject" in a]
+        )
+
+        # status must not be editable, or approval could be typed in
+        self.assertIn("status", model_admin.readonly_fields)
+
+        request = self.factory.get("/cp/")
+        request.user = self.org_admin
+        self.assertFalse(model_admin.has_add_permission(request))
+        self.assertFalse(model_admin.has_delete_permission(request))
 
     def _transfer_versions(self, xfer):
         """
