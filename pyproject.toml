@@ -110,6 +110,8 @@ dev = [
     # selenium testing
     "selenium>=4.4.3",
     "webdriver-manager>=3.8.3",
+    # playwright testing (ux-tests/)
+    "playwright>=1.40.0",
     # linting
     "ruff>=0.6",
     "pre-commit>=2.13",
