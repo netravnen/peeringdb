@@ -107,9 +107,6 @@ dev = [
     "pytest-xdist>=3.0.0",
     "pytest-benchmark>=4.0.0",
     "freezegun>=1.5.1",
-    # selenium testing
-    "selenium>=4.4.3",
-    "webdriver-manager>=3.8.3",
     # playwright testing (ux-tests/)
     "playwright>=1.40.0",
     # linting
